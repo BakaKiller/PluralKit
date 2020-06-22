@@ -1,472 +1,5 @@
-<p>
-  <strong>2020-05-07</strong>: The PluralKit API is now documented on Swagger:
-  https://app.swaggerhub.com/apis-docs/xSke/PluralKit/1.1 Accompanying it is an
-  <a
-    href="https://github.com/xSke/PluralKit/blob/master/PluralKit.API/openapi.yaml"
-    >OpenAPI v3.0 definition</a
-  >. It’s mostly complete, but is still subject to change - so don’t go
-  generating API clients and mock servers with it quite yet. It may still be
-  useful, though :)
-</p>
-
-<h1 id="api-documentation">API documentation</h1>
-<p>
-  PluralKit has a basic HTTP REST API for querying and modifying your system.
-  The root endpoint of the API is
-  <code class="highlighter-rouge">https://api.pluralkit.me/v1/</code>.
-</p>
-
-<p>
-  Endpoints will always return all fields, using
-  <code class="highlighter-rouge">null</code> when a value is missing. On
-  <code class="highlighter-rouge">PATCH</code> endpoints, missing fields from
-  the JSON request will be ignored and preserved as is, but on
-  <code class="highlighter-rouge">POST</code> endpoints will be set to
-  <code class="highlighter-rouge">null</code> or cleared.
-</p>
-
-<p>
-  Endpoints taking JSON bodies (eg. most
-  <code class="highlighter-rouge">PATCH</code> and
-  <code class="highlighter-rouge">PUT</code> endpoints) require the
-  <code class="highlighter-rouge">Content-Type: application/json</code> header
-  set.
-</p>
-
-<h2 id="authentication">Authentication</h2>
-<p>
-  Authentication is done with a simple “system token”. You can get your system
-  token by running <code class="highlighter-rouge">pk;token</code> using the
-  Discord bot, either in a channel with the bot or in DMs. Then, pass this token
-  in the <code class="highlighter-rouge">Authorization</code> HTTP header on
-  requests that require it. Failure to do so on endpoints that require
-  authentication will return a
-  <code class="highlighter-rouge">401 Unauthorized</code>.
-</p>
-
-<p>
-  Some endpoints show information that a given system may have set to private.
-  If this is a specific field (eg. description), the field will simply contain
-  <code class="highlighter-rouge">null</code> rather than the true value. If
-  this applies to entire endpoint responses (eg. fronter, switches, member
-  list), the entire request will return
-  <code class="highlighter-rouge">403 Forbidden</code>. Authenticating with the
-  system’s token (as described above) will override these privacy settings and
-  show the full information.
-</p>
-
-<h2 id="models">Models</h2>
-<p>
-  The following three models (usually represented in JSON format) represent the
-  various objects in PluralKit’s API. A
-  <code class="highlighter-rouge">?</code> after the column type indicates an
-  optional (nullable) parameter.
-</p>
-
-<h3 id="system-model">System model</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Key</th>
-      <th>Type</th>
-      <th>Patchable?</th>
-      <th>Notes</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>id</td>
-      <td>string</td>
-      <td>No</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>name</td>
-      <td>string?</td>
-      <td>Yes</td>
-      <td>100-character limit.</td>
-    </tr>
-    <tr>
-      <td>description</td>
-      <td>string?</td>
-      <td>Yes</td>
-      <td>1000-character limit.</td>
-    </tr>
-    <tr>
-      <td>tag</td>
-      <td>string?</td>
-      <td>Yes</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>avatar_url</td>
-      <td>url?</td>
-      <td>Yes</td>
-      <td>Not validated server-side.</td>
-    </tr>
-    <tr>
-      <td>tz</td>
-      <td>string?</td>
-      <td>Yes</td>
-      <td>
-        Tzdb identifier. Patching with
-        <code class="highlighter-rouge">null</code> will store
-        <code class="highlighter-rouge">"UTC"</code>.
-      </td>
-    </tr>
-    <tr>
-      <td>created</td>
-      <td>datetime</td>
-      <td>No</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>description_privacy</td>
-      <td>string?</td>
-      <td>Yes</td>
-      <td>
-        Patching with <code class="highlighter-rouge">private</code> will set it
-        to private; <code class="highlighter-rouge">public</code> or
-        <code class="highlighter-rouge">null</code> will set it to public.
-      </td>
-    </tr>
-    <tr>
-      <td>member_list_privacy</td>
-      <td>string?</td>
-      <td>Yes</td>
-      <td>Same as above.</td>
-    </tr>
-    <tr>
-      <td>front_privacy</td>
-      <td>string?</td>
-      <td>Yes</td>
-      <td>Same as above.</td>
-    </tr>
-    <tr>
-      <td>front_history_privacy</td>
-      <td>string?</td>
-      <td>Yes</td>
-      <td>Same as above.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="member-model">Member model</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Key</th>
-      <th>Type</th>
-      <th>Patchable?</th>
-      <th>Notes</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>id</td>
-      <td>string</td>
-      <td>No</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>name</td>
-      <td>string?</td>
-      <td>Yes</td>
-      <td>50-character limit.</td>
-    </tr>
-    <tr>
-      <td>display_name</td>
-      <td>string?</td>
-      <td>Yes</td>
-      <td>50-character limit.</td>
-    </tr>
-    <tr>
-      <td>description</td>
-      <td>string?</td>
-      <td>Yes</td>
-      <td>1000-character limit.</td>
-    </tr>
-    <tr>
-      <td>color</td>
-      <td>color?</td>
-      <td>Yes</td>
-      <td>
-        6-char hex (eg. <code class="highlighter-rouge">ff7000</code>), sans
-        <code class="highlighter-rouge">#</code>.
-      </td>
-    </tr>
-    <tr>
-      <td>avatar_url</td>
-      <td>url?</td>
-      <td>Yes</td>
-      <td>Not validated server-side.</td>
-    </tr>
-    <tr>
-      <td>birthday</td>
-      <td>date?</td>
-      <td>Yes</td>
-      <td>
-        ISO-8601 (<code class="highlighter-rouge">YYYY-MM-DD</code>) format,
-        year of <code class="highlighter-rouge">0001</code> or
-        <code class="highlighter-rouge">0004</code> means hidden year. Birthdays
-        set after 2020-02-10 use <code class="highlighter-rouge">0004</code> as
-        a sentinel year, but both options are recognized as valid.
-      </td>
-    </tr>
-    <tr>
-      <td>prefix</td>
-      <td>string?</td>
-      <td>Yes</td>
-      <td>
-        <strong>Deprecated.</strong> Use
-        <code class="highlighter-rouge">proxy_tags</code> instead.
-      </td>
-    </tr>
-    <tr>
-      <td>suffix</td>
-      <td>string?</td>
-      <td>Yes</td>
-      <td>
-        <strong>Deprecated.</strong> Use
-        <code class="highlighter-rouge">proxy_tags</code> instead.
-      </td>
-    </tr>
-    <tr>
-      <td>proxy_tags</td>
-      <td>ProxyTag[]</td>
-      <td>Yes (entire array)</td>
-      <td>
-        An array of ProxyTag (see below) objects, each representing a single
-        prefix/suffix pair.
-      </td>
-    </tr>
-    <tr>
-      <td>keep_proxy</td>
-      <td>bool</td>
-      <td>Yes</td>
-      <td>Whether to display a member’s proxy tags in the proxied message.</td>
-    </tr>
-    <tr>
-      <td>created</td>
-      <td>datetime</td>
-      <td>No</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>privacy</td>
-      <td>string?</td>
-      <td>Yes</td>
-      <td>
-        <strong>Deprecated.</strong> Use
-        <code class="highlighter-rouge">&lt;subject&gt;_privacy</code> and
-        <code class="highlighter-rouge">visibility</code> fields.
-      </td>
-    </tr>
-    <tr>
-      <td>visibility</td>
-      <td>string?</td>
-      <td>Yes</td>
-      <td>
-        Patching with <code class="highlighter-rouge">private</code> will set it
-        to private; <code class="highlighter-rouge">public</code> or
-        <code class="highlighter-rouge">null</code> will set it to public.
-      </td>
-    </tr>
-    <tr>
-      <td>name_privacy</td>
-      <td>string?</td>
-      <td>Yes</td>
-      <td>
-        Patching with <code class="highlighter-rouge">private</code> will set it
-        to private; <code class="highlighter-rouge">public</code> or
-        <code class="highlighter-rouge">null</code> will set it to public.
-      </td>
-    </tr>
-    <tr>
-      <td>description_privacy</td>
-      <td>string?</td>
-      <td>Yes</td>
-      <td>
-        Patching with <code class="highlighter-rouge">private</code> will set it
-        to private; <code class="highlighter-rouge">public</code> or
-        <code class="highlighter-rouge">null</code> will set it to public.
-      </td>
-    </tr>
-    <tr>
-      <td>avatar_privacy</td>
-      <td>string?</td>
-      <td>Yes</td>
-      <td>
-        Patching with <code class="highlighter-rouge">private</code> will set it
-        to private; <code class="highlighter-rouge">public</code> or
-        <code class="highlighter-rouge">null</code> will set it to public.
-      </td>
-    </tr>
-    <tr>
-      <td>birthday_privacy</td>
-      <td>string?</td>
-      <td>Yes</td>
-      <td>
-        Patching with <code class="highlighter-rouge">private</code> will set it
-        to private; <code class="highlighter-rouge">public</code> or
-        <code class="highlighter-rouge">null</code> will set it to public.
-      </td>
-    </tr>
-    <tr>
-      <td>pronoun_privacy</td>
-      <td>string?</td>
-      <td>Yes</td>
-      <td>
-        Patching with <code class="highlighter-rouge">private</code> will set it
-        to private; <code class="highlighter-rouge">public</code> or
-        <code class="highlighter-rouge">null</code> will set it to public.
-      </td>
-    </tr>
-    <tr>
-      <td>metadata_privacy</td>
-      <td>string?</td>
-      <td>Yes</td>
-      <td>
-        Patching with <code class="highlighter-rouge">private</code> will set it
-        to private; <code class="highlighter-rouge">public</code> or
-        <code class="highlighter-rouge">null</code> will set it to public.
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<h4 id="proxytag-object">ProxyTag object</h4>
-
-<table>
-  <thead>
-    <tr>
-      <th>Key</th>
-      <th>Type</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>prefix</td>
-      <td>string?</td>
-    </tr>
-    <tr>
-      <td>suffix</td>
-      <td>string?</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="switch-model">Switch model</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Key</th>
-      <th>Type</th>
-      <th>Notes</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>timestamp</td>
-      <td>datetime</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>members</td>
-      <td>list of id/Member</td>
-      <td>
-        Is sometimes in plain ID list form (eg.
-        <code class="highlighter-rouge">GET /s/&lt;id&gt;/switches</code>),
-        sometimes includes the full Member model (eg.
-        <code class="highlighter-rouge">GET /s/&lt;id&gt;/fronters</code>).
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="message-model">Message model</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Key</th>
-      <th>Type</th>
-      <th>Notes</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>timestamp</td>
-      <td>datetime</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>id</td>
-      <td>snowflake</td>
-      <td>
-        The ID of the message sent by the webhook. Encoded as string for
-        precision reasons.
-      </td>
-    </tr>
-    <tr>
-      <td>original</td>
-      <td>snowflake</td>
-      <td>
-        The ID of the (now-deleted) message that triggered the proxy. Encoded as
-        string for precision reasons.
-      </td>
-    </tr>
-    <tr>
-      <td>sender</td>
-      <td>snowflake</td>
-      <td>
-        The user ID of the account that triggered the proxy. Encoded as string
-        for precision reasons.
-      </td>
-    </tr>
-    <tr>
-      <td>channel</td>
-      <td>snowflake</td>
-      <td>
-        The ID of the channel the message was sent in. Encoded as string for
-        precision reasons.
-      </td>
-    </tr>
-    <tr>
-      <td>system</td>
-      <td>full System object</td>
-      <td>The system that proxied the message.</td>
-    </tr>
-    <tr>
-      <td>member</td>
-      <td>full Member object</td>
-      <td>The member that proxied the message.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="endpoints">Endpoints</h2>
-
-<h3 id="get-s">GET /s</h3>
-<p><strong>Requires authentication.</strong></p>
-
-<p>Returns information about your own system.</p>
-
-<h4 id="example-request">Example request</h4>
-<div class="highlighter-rouge">
-  <div class="highlight">
-    <pre class="highlight"><code>GET https://api.pluralkit.me/v1/s
-</code></pre>
-  </div>
-</div>
-
-<h4 id="example-response">Example response</h4>
-<div class="language-json highlighter-rouge">
-  <div class="highlight">
-    <pre class="highlight"><code><span class="p">{</span><span class="w">
+<!DOCTYPE html> <html lang="en-US"> <head> <meta charset="UTF-8"> <meta http-equiv="X-UA-Compatible" content="IE=Edge"> <title>API documentation - PluralKit</title> <meta name="Description" content="PluralKit's API documentation."> <link rel="shortcut icon" href="https://pluralkit.me/favicon.ico" type="image/x-icon"> <link rel="stylesheet" href="https://pluralkit.me/assets/css/just-the-docs.css"> <script type="text/javascript" src="https://pluralkit.me/assets/js/vendor/lunr.min.js"></script> <script type="text/javascript" src="https://pluralkit.me/assets/js/just-the-docs.js"></script> <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Begin Jekyll SEO tag v2.6.1 --> <title>API documentation | PluralKit</title> <meta name="generator" content="Jekyll v3.8.7" /> <meta property="og:title" content="API documentation" /> <meta property="og:locale" content="en_US" /> <meta name="description" content="PluralKit’s API documentation." /> <meta property="og:description" content="PluralKit’s API documentation." /> <link rel="canonical" href="https://pluralkit.me/api" /> <meta property="og:url" content="https://pluralkit.me/api" /> <meta property="og:site_name" content="PluralKit" /> <script type="application/ld+json"> {"description":"PluralKit’s API documentation.","@type":"WebPage","url":"https://pluralkit.me/api","headline":"API documentation","@context":"https://schema.org"}</script> <!-- End Jekyll SEO tag --> </head> <body> <svg xmlns="http://www.w3.org/2000/svg" style="display: none;"> <symbol id="link" viewBox="0 0 16 16"> <title>Link</title> <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path> </symbol> </svg> <div class="page-wrap"> <div class="side-bar"> <div class="site-header"> <a href="https://pluralkit.me" class="site-title lh-tight"> PluralKit </a> <button class="menu-button fs-3 js-main-nav-trigger" data-text-toggle="Hide" type="button">Menu</button> </div> <div class="navigation main-nav js-main-nav"> <nav role="navigation" aria-label="Main navigation"> <ul class="navigation-list"><li class="navigation-list-item"><a href="https://pluralkit.me/start" class="navigation-list-link">Getting Started</a></li><li class="navigation-list-item"><a href="https://pluralkit.me/guide" class="navigation-list-link">User Guide</a></li><li class="navigation-list-item"><a href="https://pluralkit.me/commands" class="navigation-list-link">Command List</a></li><li class="navigation-list-item active"><a href="https://pluralkit.me/api" class="navigation-list-link active">API documentation</a></li><li class="navigation-list-item"><a href="https://pluralkit.me/privacy" class="navigation-list-link">Privacy Policy</a></li><li class="navigation-list-item"><a href="https://pluralkit.me/faq" class="navigation-list-link">FAQ</a></li><li class="navigation-list-item"><a href="https://pluralkit.me/tips" class="navigation-list-link">Tips and Tricks</a></li></ul> </nav> </div> <footer class="site-footer"> <p class="text-small text-grey-dk-000 mb-4">This site uses <a href="https://github.com/pmarsceill/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.</p> </footer> </div> <div class="main-content-wrap js-main-content" tabindex="0"> <div class="main-content"> <div class="page-header js-page-header"> <div class="search"> <div class="search-input-wrap"> <input type="text" class="js-search-input search-input" tabindex="0" placeholder="Search PluralKit" aria-label="Search PluralKit" autocomplete="off"> <svg width="14" height="14" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg" class="search-icon"><title>Search</title><g fill-rule="nonzero"><path d="M17.332 20.735c-5.537 0-10-4.6-10-10.247 0-5.646 4.463-10.247 10-10.247 5.536 0 10 4.601 10 10.247s-4.464 10.247-10 10.247zm0-4c3.3 0 6-2.783 6-6.247 0-3.463-2.7-6.247-6-6.247s-6 2.784-6 6.247c0 3.464 2.7 6.247 6 6.247z"/><path d="M11.672 13.791L.192 25.271 3.02 28.1 14.5 16.62z"/></g></svg> </div> <div class="js-search-results search-results-wrap"></div> </div> <ul class="list-style-none text-small aux-nav"> <li class="d-inline-block my-0"><a href="https://discord.com/oauth2/authorize?client_id=466378653216014359&scope=bot&permissions=536995904">Add PluralKit to your server</a></li> </ul> </div> <div class="page"> <div id="main-content" class="page-content" role="main"> <p><strong>2020-05-07</strong>: The PluralKit API is now documented on Swagger: https://app.swaggerhub.com/apis-docs/xSke/PluralKit/1.1 Accompanying it is an <a href="https://github.com/xSke/PluralKit/blob/master/PluralKit.API/openapi.yaml">OpenAPI v3.0 definition</a>. It’s mostly complete, but is still subject to change - so don’t go generating API clients and mock servers with it quite yet. It may still be useful, though :)</p> <h1 id="api-documentation"> <a href="#api-documentation" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> API documentation </h1> <p>PluralKit has a basic HTTP REST API for querying and modifying your system. The root endpoint of the API is <code class="highlighter-rouge">https://api.pluralkit.me/v1/</code>.</p> <p>Endpoints will always return all fields, using <code class="highlighter-rouge">null</code> when a value is missing. On <code class="highlighter-rouge">PATCH</code> endpoints, missing fields from the JSON request will be ignored and preserved as is, but on <code class="highlighter-rouge">POST</code> endpoints will be set to <code class="highlighter-rouge">null</code> or cleared.</p> <p>Endpoints taking JSON bodies (eg. most <code class="highlighter-rouge">PATCH</code> and <code class="highlighter-rouge">PUT</code> endpoints) require the <code class="highlighter-rouge">Content-Type: application/json</code> header set.</p> <h2 id="authentication"> <a href="#authentication" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> Authentication </h2> <p>Authentication is done with a simple “system token”. You can get your system token by running <code class="highlighter-rouge">pk;token</code> using the Discord bot, either in a channel with the bot or in DMs. Then, pass this token in the <code class="highlighter-rouge">Authorization</code> HTTP header on requests that require it. Failure to do so on endpoints that require authentication will return a <code class="highlighter-rouge">401 Unauthorized</code>.</p> <p>Some endpoints show information that a given system may have set to private. If this is a specific field (eg. description), the field will simply contain <code class="highlighter-rouge">null</code> rather than the true value. If this applies to entire endpoint responses (eg. fronter, switches, member list), the entire request will return <code class="highlighter-rouge">403 Forbidden</code>. Authenticating with the system’s token (as described above) will override these privacy settings and show the full information.</p> <h2 id="models"> <a href="#models" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> Models </h2> <p>The following three models (usually represented in JSON format) represent the various objects in PluralKit’s API. A <code class="highlighter-rouge">?</code> after the column type indicates an optional (nullable) parameter.</p> <h3 id="system-model"> <a href="#system-model" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> System model </h3> <div class="table-wrapper"><table> <thead> <tr> <th>Key</th> <th>Type</th> <th>Patchable?</th> <th>Notes</th> </tr> </thead> <tbody> <tr> <td>id</td> <td>string</td> <td>No</td> <td> </td> </tr> <tr> <td>name</td> <td>string?</td> <td>Yes</td> <td>100-character limit.</td> </tr> <tr> <td>description</td> <td>string?</td> <td>Yes</td> <td>1000-character limit.</td> </tr> <tr> <td>tag</td> <td>string?</td> <td>Yes</td> <td> </td> </tr> <tr> <td>avatar_url</td> <td>url?</td> <td>Yes</td> <td>Not validated server-side.</td> </tr> <tr> <td>tz</td> <td>string?</td> <td>Yes</td> <td>Tzdb identifier. Patching with <code class="highlighter-rouge">null</code> will store <code class="highlighter-rouge">"UTC"</code>.</td> </tr> <tr> <td>created</td> <td>datetime</td> <td>No</td> <td> </td> </tr> <tr> <td>description_privacy</td> <td>string?</td> <td>Yes</td> <td>Patching with <code class="highlighter-rouge">private</code> will set it to private; <code class="highlighter-rouge">public</code> or <code class="highlighter-rouge">null</code> will set it to public.</td> </tr> <tr> <td>member_list_privacy</td> <td>string?</td> <td>Yes</td> <td>Same as above.</td> </tr> <tr> <td>front_privacy</td> <td>string?</td> <td>Yes</td> <td>Same as above.</td> </tr> <tr> <td>front_history_privacy</td> <td>string?</td> <td>Yes</td> <td>Same as above.</td> </tr> </tbody> </table></div> <h3 id="member-model"> <a href="#member-model" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> Member model </h3> <div class="table-wrapper"><table> <thead> <tr> <th>Key</th> <th>Type</th> <th>Patchable?</th> <th>Notes</th> </tr> </thead> <tbody> <tr> <td>id</td> <td>string</td> <td>No</td> <td> </td> </tr> <tr> <td>name</td> <td>string?</td> <td>Yes</td> <td>50-character limit.</td> </tr> <tr> <td>display_name</td> <td>string?</td> <td>Yes</td> <td>50-character limit.</td> </tr> <tr> <td>description</td> <td>string?</td> <td>Yes</td> <td>1000-character limit.</td> </tr> <tr> <td>color</td> <td>color?</td> <td>Yes</td> <td>6-char hex (eg. <code class="highlighter-rouge">ff7000</code>), sans <code class="highlighter-rouge">#</code>.</td> </tr> <tr> <td>avatar_url</td> <td>url?</td> <td>Yes</td> <td>Not validated server-side.</td> </tr> <tr> <td>birthday</td> <td>date?</td> <td>Yes</td> <td>ISO-8601 (<code class="highlighter-rouge">YYYY-MM-DD</code>) format, year of <code class="highlighter-rouge">0001</code> or <code class="highlighter-rouge">0004</code> means hidden year. Birthdays set after 2020-02-10 use <code class="highlighter-rouge">0004</code> as a sentinel year, but both options are recognized as valid.</td> </tr> <tr> <td>prefix</td> <td>string?</td> <td>Yes</td> <td><strong>Deprecated.</strong> Use <code class="highlighter-rouge">proxy_tags</code> instead.</td> </tr> <tr> <td>suffix</td> <td>string?</td> <td>Yes</td> <td><strong>Deprecated.</strong> Use <code class="highlighter-rouge">proxy_tags</code> instead.</td> </tr> <tr> <td>proxy_tags</td> <td>ProxyTag[]</td> <td>Yes (entire array)</td> <td>An array of ProxyTag (see below) objects, each representing a single prefix/suffix pair.</td> </tr> <tr> <td>keep_proxy</td> <td>bool</td> <td>Yes</td> <td>Whether to display a member’s proxy tags in the proxied message.</td> </tr> <tr> <td>created</td> <td>datetime</td> <td>No</td> <td> </td> </tr> <tr> <td>privacy</td> <td>string?</td> <td>Yes</td> <td><strong>Deprecated.</strong> Use <code class="highlighter-rouge">&lt;subject&gt;_privacy</code> and <code class="highlighter-rouge">visibility</code> fields.</td> </tr> <tr> <td>visibility</td> <td>string?</td> <td>Yes</td> <td>Patching with <code class="highlighter-rouge">private</code> will set it to private; <code class="highlighter-rouge">public</code> or <code class="highlighter-rouge">null</code> will set it to public.</td> </tr> <tr> <td>name_privacy</td> <td>string?</td> <td>Yes</td> <td>Patching with <code class="highlighter-rouge">private</code> will set it to private; <code class="highlighter-rouge">public</code> or <code class="highlighter-rouge">null</code> will set it to public.</td> </tr> <tr> <td>description_privacy</td> <td>string?</td> <td>Yes</td> <td>Patching with <code class="highlighter-rouge">private</code> will set it to private; <code class="highlighter-rouge">public</code> or <code class="highlighter-rouge">null</code> will set it to public.</td> </tr> <tr> <td>avatar_privacy</td> <td>string?</td> <td>Yes</td> <td>Patching with <code class="highlighter-rouge">private</code> will set it to private; <code class="highlighter-rouge">public</code> or <code class="highlighter-rouge">null</code> will set it to public.</td> </tr> <tr> <td>birthday_privacy</td> <td>string?</td> <td>Yes</td> <td>Patching with <code class="highlighter-rouge">private</code> will set it to private; <code class="highlighter-rouge">public</code> or <code class="highlighter-rouge">null</code> will set it to public.</td> </tr> <tr> <td>pronoun_privacy</td> <td>string?</td> <td>Yes</td> <td>Patching with <code class="highlighter-rouge">private</code> will set it to private; <code class="highlighter-rouge">public</code> or <code class="highlighter-rouge">null</code> will set it to public.</td> </tr> <tr> <td>metadata_privacy</td> <td>string?</td> <td>Yes</td> <td>Patching with <code class="highlighter-rouge">private</code> will set it to private; <code class="highlighter-rouge">public</code> or <code class="highlighter-rouge">null</code> will set it to public.</td> </tr> </tbody> </table></div> <h4 id="proxytag-object"> <a href="#proxytag-object" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> ProxyTag object </h4> <div class="table-wrapper"><table> <thead> <tr> <th>Key</th> <th>Type</th> </tr> </thead> <tbody> <tr> <td>prefix</td> <td>string?</td> </tr> <tr> <td>suffix</td> <td>string?</td> </tr> </tbody> </table></div> <h3 id="switch-model"> <a href="#switch-model" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> Switch model </h3> <div class="table-wrapper"><table> <thead> <tr> <th>Key</th> <th>Type</th> <th>Notes</th> </tr> </thead> <tbody> <tr> <td>timestamp</td> <td>datetime</td> <td> </td> </tr> <tr> <td>members</td> <td>list of id/Member</td> <td>Is sometimes in plain ID list form (eg. <code class="highlighter-rouge">GET /s/&lt;id&gt;/switches</code>), sometimes includes the full Member model (eg. <code class="highlighter-rouge">GET /s/&lt;id&gt;/fronters</code>).</td> </tr> </tbody> </table></div> <h3 id="message-model"> <a href="#message-model" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> Message model </h3> <div class="table-wrapper"><table> <thead> <tr> <th>Key</th> <th>Type</th> <th>Notes</th> </tr> </thead> <tbody> <tr> <td>timestamp</td> <td>datetime</td> <td> </td> </tr> <tr> <td>id</td> <td>snowflake</td> <td>The ID of the message sent by the webhook. Encoded as string for precision reasons.</td> </tr> <tr> <td>original</td> <td>snowflake</td> <td>The ID of the (now-deleted) message that triggered the proxy. Encoded as string for precision reasons.</td> </tr> <tr> <td>sender</td> <td>snowflake</td> <td>The user ID of the account that triggered the proxy. Encoded as string for precision reasons.</td> </tr> <tr> <td>channel</td> <td>snowflake</td> <td>The ID of the channel the message was sent in. Encoded as string for precision reasons.</td> </tr> <tr> <td>system</td> <td>full System object</td> <td>The system that proxied the message.</td> </tr> <tr> <td>member</td> <td>full Member object</td> <td>The member that proxied the message.</td> </tr> </tbody> </table></div> <h2 id="endpoints"> <a href="#endpoints" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> Endpoints </h2> <h3 id="get-s"> <a href="#get-s" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> GET /s </h3> <p><strong>Requires authentication.</strong></p> <p>Returns information about your own system.</p> <h4 id="example-request"> <a href="#example-request" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> Example request </h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET https://api.pluralkit.me/v1/s
+</code></pre></div></div> <h4 id="example-response"> <a href="#example-response" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> Example response </h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"abcde"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My System"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is my system description. Yay."</span><span class="p">,</span><span class="w">
@@ -479,31 +12,8 @@
     </span><span class="nl">"front_privacy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"public"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"front_history_privacy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"private"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-  </div>
-</div>
-
-<h3 id="get-sid">GET /s/&lt;id&gt;</h3>
-<p>
-  Queries a system by its 5-character ID, and returns information about it. If
-  the system doesn’t exist, returns
-  <code class="highlighter-rouge">404 Not Found</code>. Some fields may be set
-  to <code class="highlighter-rouge">null</code> if unauthenticated and the
-  system has chosen to make those fields private.
-</p>
-
-<h4 id="example-request-1">Example request</h4>
-<div class="highlighter-rouge">
-  <div class="highlight">
-    <pre class="highlight"><code>GET https://api.pluralkit.me/v1/s/abcde
-</code></pre>
-  </div>
-</div>
-
-<h4 id="example-response-1">Example response</h4>
-<div class="language-json highlighter-rouge">
-  <div class="highlight">
-    <pre class="highlight"><code><span class="p">{</span><span class="w">
+</span></code></pre></div></div> <h3 id="get-sid"> <a href="#get-sid" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> GET /s/&lt;id&gt; </h3> <p>Queries a system by its 5-character ID, and returns information about it. If the system doesn’t exist, returns <code class="highlighter-rouge">404 Not Found</code>. Some fields may be set to <code class="highlighter-rouge">null</code> if unauthenticated and the system has chosen to make those fields private.</p> <h4 id="example-request-1"> <a href="#example-request-1" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> Example request </h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET https://api.pluralkit.me/v1/s/abcde
+</code></pre></div></div> <h4 id="example-response-1"> <a href="#example-response-1" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> Example response </h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"abcde"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My System"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is my system description. Yay."</span><span class="p">,</span><span class="w">
@@ -516,33 +26,8 @@
     </span><span class="nl">"front_privacy"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nl">"front_history_privacy"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-  </div>
-</div>
-
-<h3 id="get-sidmembers">GET /s/&lt;id&gt;/members</h3>
-<p>
-  Queries a system’s member list by its 5-character ID. If the system doesn’t
-  exist, returns <code class="highlighter-rouge">404 Not Found</code>. If the
-  system has chosen to hide its member list, this will return
-  <code class="highlighter-rouge">403 Forbidden</code>, unless the request is
-  authenticated with the system’s token. If the request is not authenticated
-  with the system’s token, members marked as private will <em>not</em> be
-  returned.
-</p>
-
-<h4 id="example-request-2">Example request</h4>
-<div class="highlighter-rouge">
-  <div class="highlight">
-    <pre class="highlight"><code>GET https://api.pluralkit.me/v1/s/abcde/members
-</code></pre>
-  </div>
-</div>
-
-<h4 id="example-response-2">Example response</h4>
-<div class="language-json highlighter-rouge">
-  <div class="highlight">
-    <pre class="highlight"><code><span class="p">[</span><span class="w">
+</span></code></pre></div></div> <h3 id="get-sidmembers"> <a href="#get-sidmembers" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> GET /s/&lt;id&gt;/members </h3> <p>Queries a system’s member list by its 5-character ID. If the system doesn’t exist, returns <code class="highlighter-rouge">404 Not Found</code>. If the system has chosen to hide its member list, this will return <code class="highlighter-rouge">403 Forbidden</code>, unless the request is authenticated with the system’s token. If the request is not authenticated with the system’s token, members marked as private will <em>not</em> be returned.</p> <h4 id="example-request-2"> <a href="#example-request-2" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> Example request </h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET https://api.pluralkit.me/v1/s/abcde/members
+</code></pre></div></div> <h4 id="example-response-2"> <a href="#example-response-2" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> Example response </h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
         </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"qwert"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Craig Johnson"</span><span class="p">,</span><span class="w">
@@ -562,42 +47,8 @@
         </span><span class="nl">"metadata_privacy"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
-</span></code></pre>
-  </div>
-</div>
-
-<h3 id="get-sidswitchesbefore">
-  GET /s/&lt;id&gt;/switches[?before=<timestamp>]</timestamp>
-</h3>
-<p>
-  Returns a system’s switch history in newest-first chronological order, with a
-  maximum of 100 switches. If the system doesn’t exist, returns
-  <code class="highlighter-rouge">404 Not Found</code>. Optionally takes a
-  <code class="highlighter-rouge">?before=</code> query parameter with an
-  ISO-8601-formatted timestamp, and will only return switches that happen before
-  that timestamp.
-</p>
-
-<p>
-  If the system has chosen to hide its switch history, this will return
-  <code class="highlighter-rouge">403 Forbidden</code>, unless the request is
-  authenticated with the system’s token.
-</p>
-
-<h4 id="example-request-3">Example request</h4>
-<div class="highlighter-rouge">
-  <div class="highlight">
-    <pre
-      class="highlight"
-    ><code>GET https://api.pluralkit.me/v1/s/abcde/switches?before=2019-03-01T14:00:00Z
-</code></pre>
-  </div>
-</div>
-
-<h4 id="example-response-3">Example response</h4>
-<div class="language-json highlighter-rouge">
-  <div class="highlight">
-    <pre class="highlight"><code><span class="p">[</span><span class="w">
+</span></code></pre></div></div> <h3 id="get-sidswitchesbefore"> <a href="#get-sidswitchesbefore" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> GET /s/&lt;id&gt;/switches[?before=<timestamp>]</timestamp> </h3> <p>Returns a system’s switch history in newest-first chronological order, with a maximum of 100 switches. If the system doesn’t exist, returns <code class="highlighter-rouge">404 Not Found</code>. Optionally takes a <code class="highlighter-rouge">?before=</code> query parameter with an ISO-8601-formatted timestamp, and will only return switches that happen before that timestamp.</p> <p>If the system has chosen to hide its switch history, this will return <code class="highlighter-rouge">403 Forbidden</code>, unless the request is authenticated with the system’s token.</p> <h4 id="example-request-3"> <a href="#example-request-3" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> Example request </h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET https://api.pluralkit.me/v1/s/abcde/switches?before=2019-03-01T14:00:00Z
+</code></pre></div></div> <h4 id="example-response-3"> <a href="#example-response-3" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> Example response </h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
         </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-02-23T14:20:59.123456Z"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"members"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"qwert"</span><span class="p">,</span><span class="w"> </span><span class="s2">"yuiop"</span><span class="p">]</span><span class="w">
@@ -611,35 +62,8 @@
         </span><span class="nl">"members"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
-</span></code></pre>
-  </div>
-</div>
-
-<h3 id="get-sidfronters">GET /s/&lt;id&gt;/fronters</h3>
-<p>
-  Returns a system’s current fronter(s), with fully hydrated member objects. If
-  the system doesn’t exist, <em>or</em> the system has no registered switches,
-  returns <code class="highlighter-rouge">404 Not Found</code>. If the system
-  has chosen to hide its current fronters, this will return
-  <code class="highlighter-rouge">403 Forbidden</code>, unless the request is
-  authenticated with the system’s token. If a returned member is private, and
-  the request isn’t properly authenticated, some fields may be null.
-</p>
-
-<h4 id="example-request-4">Example request</h4>
-<div class="highlighter-rouge">
-  <div class="highlight">
-    <pre
-      class="highlight"
-    ><code>GET https://api.pluralkit.me/v1/s/abcde/fronters
-</code></pre>
-  </div>
-</div>
-
-<h4 id="example-response-4">Example response</h4>
-<div class="language-json highlighter-rouge">
-  <div class="highlight">
-    <pre class="highlight"><code><span class="p">{</span><span class="w">
+</span></code></pre></div></div> <h3 id="get-sidfronters"> <a href="#get-sidfronters" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> GET /s/&lt;id&gt;/fronters </h3> <p>Returns a system’s current fronter(s), with fully hydrated member objects. If the system doesn’t exist, <em>or</em> the system has no registered switches, returns <code class="highlighter-rouge">404 Not Found</code>. If the system has chosen to hide its current fronters, this will return <code class="highlighter-rouge">403 Forbidden</code>, unless the request is authenticated with the system’s token. If a returned member is private, and the request isn’t properly authenticated, some fields may be null.</p> <h4 id="example-request-4"> <a href="#example-request-4" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> Example request </h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET https://api.pluralkit.me/v1/s/abcde/fronters
+</code></pre></div></div> <h4 id="example-response-4"> <a href="#example-response-4" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> Example response </h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-09T17:22:46.47441Z"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"members"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
@@ -663,29 +87,8 @@
         </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-  </div>
-</div>
-
-<h3 id="patch-s">PATCH /s</h3>
-<p><strong>Requires authentication.</strong></p>
-
-<p>
-  Edits your own system’s information. Missing fields will keep their current
-  values. Will return the new system object.
-</p>
-
-<h4 id="example-request-5">Example request</h4>
-<div class="highlighter-rouge">
-  <div class="highlight">
-    <pre class="highlight"><code>PATCH https://api.pluralkit.me/v1/s
-</code></pre>
-  </div>
-</div>
-
-<div class="language-json highlighter-rouge">
-  <div class="highlight">
-    <pre class="highlight"><code><span class="p">{</span><span class="w">
+</span></code></pre></div></div> <h3 id="patch-s"> <a href="#patch-s" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> PATCH /s </h3> <p><strong>Requires authentication.</strong></p> <p>Edits your own system’s information. Missing fields will keep their current values. Will return the new system object.</p> <h4 id="example-request-5"> <a href="#example-request-5" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> Example request </h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PATCH https://api.pluralkit.me/v1/s
+</code></pre></div></div> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New System Name"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{Sys}"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://path/to/new/avatar.png"</span><span class="p">,</span><span class="w">
@@ -695,19 +98,7 @@
     </span><span class="nl">"front_privacy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"public"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"front_history_privacy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"private"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-  </div>
-</div>
-<p>
-  (note the absence of a
-  <code class="highlighter-rouge">description</code> field, which has its old
-  value preserved in the response)
-</p>
-
-<h4 id="example-response-5">Example response</h4>
-<div class="language-json highlighter-rouge">
-  <div class="highlight">
-    <pre class="highlight"><code><span class="p">{</span><span class="w">
+</span></code></pre></div></div> <p>(note the absence of a <code class="highlighter-rouge">description</code> field, which has its old value preserved in the response)</p> <h4 id="example-response-5"> <a href="#example-response-5" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> Example response </h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"abcde"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New System Name"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The Old Description, Not Updated"</span><span class="p">,</span><span class="w">
@@ -720,60 +111,12 @@
     </span><span class="nl">"front_privacy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"public"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"front_history_privacy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"private"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-  </div>
-</div>
-
-<h3 id="post-sswitches">POST /s/switches</h3>
-<p><strong>Requires authentication.</strong></p>
-
-<p>Registers a new switch to your own system given a list of member IDs.</p>
-
-<h4 id="example-request-6">Example request</h4>
-<div class="highlighter-rouge">
-  <div class="highlight">
-    <pre class="highlight"><code>POST https://api.pluralkit.me/v1/s/switches
-</code></pre>
-  </div>
-</div>
-
-<div class="language-json highlighter-rouge">
-  <div class="highlight">
-    <pre class="highlight"><code><span class="p">{</span><span class="w">
+</span></code></pre></div></div> <h3 id="post-sswitches"> <a href="#post-sswitches" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> POST /s/switches </h3> <p><strong>Requires authentication.</strong></p> <p>Registers a new switch to your own system given a list of member IDs.</p> <h4 id="example-request-6"> <a href="#example-request-6" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> Example request </h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST https://api.pluralkit.me/v1/s/switches
+</code></pre></div></div> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"members"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"qwert"</span><span class="p">,</span><span class="w"> </span><span class="s2">"yuiop"</span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-  </div>
-</div>
-
-<h4 id="example-response-6">Example response</h4>
-<p>(<code class="highlighter-rouge">204 No Content</code>)</p>
-
-<h3 id="get-mid">GET /m/&lt;id&gt;</h3>
-<p>
-  Queries a member’s information by its 5-character member ID. If the member
-  does not exist, will return
-  <code class="highlighter-rouge">404 Not Found</code>. If this member is marked
-  private, and the request isn’t authenticated with the member’s system’s token,
-  some fields will contain <code class="highlighter-rouge">null</code> rather
-  than the true value (corresponding with the privacy settings). Regardless of
-  privacy setting, a non-authenticated request will only receive
-  <code class="highlighter-rouge">null</code> for the privacy fields (and
-  <code class="highlighter-rouge">visibility</code>).
-</p>
-
-<h4 id="example-request-7">Example request</h4>
-<div class="highlighter-rouge">
-  <div class="highlight">
-    <pre class="highlight"><code>GET https://api.pluralkit.me/v1/m/qwert
-</code></pre>
-  </div>
-</div>
-
-<h4 id="example-response-7">Example response</h4>
-<div class="language-json highlighter-rouge">
-  <div class="highlight">
-    <pre class="highlight"><code><span class="p">{</span><span class="w">
+</span></code></pre></div></div> <h4 id="example-response-6"> <a href="#example-response-6" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> Example response </h4> <p>(<code class="highlighter-rouge">204 No Content</code>)</p> <h3 id="get-mid"> <a href="#get-mid" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> GET /m/&lt;id&gt; </h3> <p>Queries a member’s information by its 5-character member ID. If the member does not exist, will return <code class="highlighter-rouge">404 Not Found</code>. If this member is marked private, and the request isn’t authenticated with the member’s system’s token, some fields will contain <code class="highlighter-rouge">null</code> rather than the true value (corresponding with the privacy settings). Regardless of privacy setting, a non-authenticated request will only receive <code class="highlighter-rouge">null</code> for the privacy fields (and <code class="highlighter-rouge">visibility</code>).</p> <h4 id="example-request-7"> <a href="#example-request-7" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> Example request </h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET https://api.pluralkit.me/v1/m/qwert
+</code></pre></div></div> <h4 id="example-response-7"> <a href="#example-response-7" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> Example response </h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"qwert"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Craig Johnson"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ff7000"</span><span class="p">,</span><span class="w">
@@ -792,30 +135,8 @@
     </span><span class="nl">"pronoun_privacy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"public"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"metadata_privacy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"public"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-  </div>
-</div>
-
-<h3 id="post-m">POST /m</h3>
-<p><strong>Requires authentication.</strong></p>
-
-<p>
-  Creates a new member with the information given. Missing fields (except for
-  name) will be set to <code class="highlighter-rouge">null</code>. Will return
-  the new member object. Member must (obviously) belong to your own system.
-</p>
-
-<h4 id="example-request-8">Example request</h4>
-<div class="highlighter-rouge">
-  <div class="highlight">
-    <pre class="highlight"><code>POST https://api.pluralkit.me/v1/m
-</code></pre>
-  </div>
-</div>
-
-<div class="language-json highlighter-rouge">
-  <div class="highlight">
-    <pre class="highlight"><code><span class="p">{</span><span class="w">
+</span></code></pre></div></div> <h3 id="post-m"> <a href="#post-m" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> POST /m </h3> <p><strong>Requires authentication.</strong></p> <p>Creates a new member with the information given. Missing fields (except for name) will be set to <code class="highlighter-rouge">null</code>. Will return the new member object. Member must (obviously) belong to your own system.</p> <h4 id="example-request-8"> <a href="#example-request-8" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> Example request </h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST https://api.pluralkit.me/v1/m
+</code></pre></div></div> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Craig Peterson"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Craig Peterson [he/they]"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"color"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -832,19 +153,7 @@
     </span><span class="nl">"pronoun_privacy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"public"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"metadata_privacy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"private"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-  </div>
-</div>
-<p>
-  (note the absence of a
-  <code class="highlighter-rouge">proxy_tags</code> field, which is cleared in
-  the response)
-</p>
-
-<h4 id="example-response-8">Example response</h4>
-<div class="language-json highlighter-rouge">
-  <div class="highlight">
-    <pre class="highlight"><code><span class="p">{</span><span class="w">
+</span></code></pre></div></div> <p>(note the absence of a <code class="highlighter-rouge">proxy_tags</code> field, which is cleared in the response)</p> <h4 id="example-response-8"> <a href="#example-response-8" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> Example response </h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"qwert"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Craig Peterson"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Craig Peterson [he/they]"</span><span class="p">,</span><span class="w">
@@ -863,30 +172,8 @@
     </span><span class="nl">"pronoun_privacy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"public"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"metadata_privacy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"private"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-  </div>
-</div>
-
-<h3 id="patch-mid">PATCH /m/&lt;id&gt;</h3>
-<p><strong>Requires authentication.</strong></p>
-
-<p>
-  Edits a member’s information. Missing fields will keep their current values.
-  Will return the new member object. Member must (obviously) belong to your own
-  system.
-</p>
-
-<h4 id="example-request-9">Example request</h4>
-<div class="highlighter-rouge">
-  <div class="highlight">
-    <pre class="highlight"><code>PATCH https://api.pluralkit.me/v1/m/qwert
-</code></pre>
-  </div>
-</div>
-
-<div class="language-json highlighter-rouge">
-  <div class="highlight">
-    <pre class="highlight"><code><span class="p">{</span><span class="w">
+</span></code></pre></div></div> <h3 id="patch-mid"> <a href="#patch-mid" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> PATCH /m/&lt;id&gt; </h3> <p><strong>Requires authentication.</strong></p> <p>Edits a member’s information. Missing fields will keep their current values. Will return the new member object. Member must (obviously) belong to your own system.</p> <h4 id="example-request-9"> <a href="#example-request-9" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> Example request </h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PATCH https://api.pluralkit.me/v1/m/qwert
+</code></pre></div></div> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Craig Peterson"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Craig Peterson [he/they]"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"color"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -903,19 +190,7 @@
     </span><span class="nl">"pronoun_privacy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"public"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"metadata_privacy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"private"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-  </div>
-</div>
-<p>
-  (note the absence of a
-  <code class="highlighter-rouge">proxy_tags</code> field, which keeps its old
-  value in the response)
-</p>
-
-<h4 id="example-response-9">Example response</h4>
-<div class="language-json highlighter-rouge">
-  <div class="highlight">
-    <pre class="highlight"><code><span class="p">{</span><span class="w">
+</span></code></pre></div></div> <p>(note the absence of a <code class="highlighter-rouge">proxy_tags</code> field, which keeps its old value in the response)</p> <h4 id="example-response-9"> <a href="#example-response-9" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> Example response </h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"qwert"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Craig Peterson"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Craig Peterson [he/they]"</span><span class="p">,</span><span class="w">
@@ -935,53 +210,9 @@
     </span><span class="nl">"pronoun_privacy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"public"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"metadata_privacy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"private"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-  </div>
-</div>
-
-<h3 id="delete-mid">DELETE /m/&lt;id&gt;</h3>
-<p><strong>Requires authentication.</strong></p>
-
-<p>
-  Deletes a member from the database. Be careful as there is no confirmation and
-  the member will be deleted immediately. Member must (obviously) belong to your
-  own system.
-</p>
-
-<h4 id="example-request-10">Example request</h4>
-<div class="highlighter-rouge">
-  <div class="highlight">
-    <pre class="highlight"><code>DELETE https://api.pluralkit.me/v1/m/qwert
-</code></pre>
-  </div>
-</div>
-
-<h4 id="example-response-10">Example response</h4>
-<p>(<code class="highlighter-rouge">204 No Content</code>)</p>
-
-<h3 id="get-aid">GET /a/&lt;id&gt;</h3>
-<p>
-  Queries a system by its linked Discord account ID (17/18-digit numeric
-  snowflake). Returns <code class="highlighter-rouge">404 Not Found</code> if
-  the account doesn’t have a system linked. Some fields may be set to
-  <code class="highlighter-rouge">null</code> if unauthenticated and the system
-  has chosen to make those fields private.
-</p>
-
-<h4 id="example-request-11">Example request</h4>
-<div class="highlighter-rouge">
-  <div class="highlight">
-    <pre
-      class="highlight"
-    ><code>GET https://api.pluralkit.me/v1/a/466378653216014359
-</code></pre>
-  </div>
-</div>
-
-<h4 id="example-response-11">Example response</h4>
-<div class="language-json highlighter-rouge">
-  <div class="highlight">
-    <pre class="highlight"><code><span class="p">{</span><span class="w">
+</span></code></pre></div></div> <h3 id="delete-mid"> <a href="#delete-mid" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> DELETE /m/&lt;id&gt; </h3> <p><strong>Requires authentication.</strong></p> <p>Deletes a member from the database. Be careful as there is no confirmation and the member will be deleted immediately. Member must (obviously) belong to your own system.</p> <h4 id="example-request-10"> <a href="#example-request-10" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> Example request </h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DELETE https://api.pluralkit.me/v1/m/qwert
+</code></pre></div></div> <h4 id="example-response-10"> <a href="#example-response-10" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> Example response </h4> <p>(<code class="highlighter-rouge">204 No Content</code>)</p> <h3 id="get-aid"> <a href="#get-aid" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> GET /a/&lt;id&gt; </h3> <p>Queries a system by its linked Discord account ID (17/18-digit numeric snowflake). Returns <code class="highlighter-rouge">404 Not Found</code> if the account doesn’t have a system linked. Some fields may be set to <code class="highlighter-rouge">null</code> if unauthenticated and the system has chosen to make those fields private.</p> <h4 id="example-request-11"> <a href="#example-request-11" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> Example request </h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET https://api.pluralkit.me/v1/a/466378653216014359
+</code></pre></div></div> <h4 id="example-response-11"> <a href="#example-response-11" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> Example response </h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"abcde"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My System"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is my system description. Yay."</span><span class="p">,</span><span class="w">
@@ -994,38 +225,8 @@
     </span><span class="nl">"front_privacy"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nl">"front_history_privacy"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-  </div>
-</div>
-
-<h3 id="get-msgid">GET /msg/&lt;id&gt;</h3>
-<p>
-  Looks up a proxied message by its message ID. Returns
-  <code class="highlighter-rouge">404 Not Found</code> if the message ID is
-  invalid or wasn’t found (eg. was deleted or not proxied by PK). You can also
-  look messages up by their <em>trigger</em> message ID (useful for, say,
-  logging bot integration).
-</p>
-
-<p>
-  The returned system and member’s privacy settings will be respected, and as
-  such, some fields may be set to null without the proper authentication.
-</p>
-
-<h4 id="example-request-12">Example request</h4>
-<div class="highlighter-rouge">
-  <div class="highlight">
-    <pre
-      class="highlight"
-    ><code>GET https://api.pluralkit.me/v1/msg/601014599386398700
-</code></pre>
-  </div>
-</div>
-
-<h4 id="example-response-12">Example response</h4>
-<div class="language-json highlighter-rouge">
-  <div class="highlight">
-    <pre class="highlight"><code><span class="p">{</span><span class="w">
+</span></code></pre></div></div> <h3 id="get-msgid"> <a href="#get-msgid" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> GET /msg/&lt;id&gt; </h3> <p>Looks up a proxied message by its message ID. Returns <code class="highlighter-rouge">404 Not Found</code> if the message ID is invalid or wasn’t found (eg. was deleted or not proxied by PK). You can also look messages up by their <em>trigger</em> message ID (useful for, say, logging bot integration).</p> <p>The returned system and member’s privacy settings will be respected, and as such, some fields may be set to null without the proper authentication.</p> <h4 id="example-request-12"> <a href="#example-request-12" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> Example request </h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET https://api.pluralkit.me/v1/msg/601014599386398700
+</code></pre></div></div> <h4 id="example-response-12"> <a href="#example-response-12" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> Example response </h4> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-07-17T11:37:26.805Z"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"601014599386398700"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"original"</span><span class="p">:</span><span class="w"> </span><span class="s2">"601014598168435600"</span><span class="p">,</span><span class="w">
@@ -1060,119 +261,4 @@
         </span><span class="nl">"metadata_privacy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"private"</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-  </div>
-</div>
-
-<h2 id="version-history">Version history</h2>
-<ul>
-  <li>
-    2020-06-17 (v1.1)
-    <ul>
-      <li>
-        The API now has values for granular member privacy. The new fields are
-        as follows: <code class="highlighter-rouge">visibility</code>,
-        <code class="highlighter-rouge">name_privacy</code>,
-        <code class="highlighter-rouge">description_privacy</code>,
-        <code class="highlighter-rouge">avatar_privacy</code>,
-        <code class="highlighter-rouge">birthday_privacy</code>,
-        <code class="highlighter-rouge">pronoun_privacy</code>,
-        <code class="highlighter-rouge">metadata_privacy</code>. All are strings
-        and accept the values of <code class="highlighter-rouge">public</code>,
-        <code class="highlighter-rouge">private</code> and
-        <code class="highlighter-rouge">null</code>.
-      </li>
-      <li>
-        The <code class="highlighter-rouge">privacy</code> field has now been
-        deprecated and should not be used. It’s still returned (mirroring the
-        <code class="highlighter-rouge">visibility</code> field), and writing to
-        it will write to <em>all privacy options</em>.
-      </li>
-    </ul>
-  </li>
-  <li>
-    2020-05-07
-    <ul>
-      <li>
-        The API (v1) is now formally(ish) defined with OpenAPI v3.0.
-        <a
-          href="https://github.com/xSke/PluralKit/blob/master/PluralKit.API/openapi.yaml"
-          >The definition file can be found here.</a
-        >
-      </li>
-    </ul>
-  </li>
-  <li>
-    2020-02-10
-    <ul>
-      <li>
-        Birthdates with no year can now be stored using
-        <code class="highlighter-rouge">0004</code> as a year, for better leap
-        year support. Both options remain valid and either may be returned by
-        the API.
-      </li>
-      <li>
-        Added privacy set/get support, meaning you will now see privacy values
-        in authed requests and can set them.
-      </li>
-    </ul>
-  </li>
-  <li>
-    2020-01-08
-    <ul>
-      <li>
-        Added privacy support, meaning some responses will now lack information
-        or return 403s, depending on the specific system and member’s privacy
-        settings.
-      </li>
-    </ul>
-  </li>
-  <li>
-    2019-12-28
-    <ul>
-      <li>
-        Changed behaviour of missing fields in PATCH responses, will now
-        preserve the old value instead of clearing
-      </li>
-      <li>
-        This is technically a breaking change, but not
-        <em>significantly</em> so, so I won’t bump the version number.
-      </li>
-    </ul>
-  </li>
-  <li>
-    2019-10-31
-    <ul>
-      <li>
-        Added <code class="highlighter-rouge">proxy_tags</code> field to members
-      </li>
-      <li>
-        Added <code class="highlighter-rouge">keep_proxy</code> field to members
-      </li>
-      <li>
-        Deprecated <code class="highlighter-rouge">prefix</code> and
-        <code class="highlighter-rouge">suffix</code> member fields, will be
-        removed at some point (tm)
-      </li>
-    </ul>
-  </li>
-  <li>
-    2019-07-17
-    <ul>
-      <li>Added endpoint for querying system by account</li>
-      <li>Added endpoint for querying message contents</li>
-    </ul>
-  </li>
-  <li>
-    2019-07-10 <strong>(v1)</strong>
-    <ul>
-      <li>First specified version</li>
-    </ul>
-  </li>
-  <li>
-    (prehistory)
-    <ul>
-      <li>Initial release</li>
-    </ul>
-  </li>
-</ul>
+</span></code></pre></div></div> <h2 id="version-history"> <a href="#version-history" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#link"></use></svg></a> Version history </h2> <ul> <li>2020-06-17 (v1.1) <ul> <li>The API now has values for granular member privacy. The new fields are as follows: <code class="highlighter-rouge">visibility</code>, <code class="highlighter-rouge">name_privacy</code>, <code class="highlighter-rouge">description_privacy</code>, <code class="highlighter-rouge">avatar_privacy</code>, <code class="highlighter-rouge">birthday_privacy</code>, <code class="highlighter-rouge">pronoun_privacy</code>, <code class="highlighter-rouge">metadata_privacy</code>. All are strings and accept the values of <code class="highlighter-rouge">public</code>, <code class="highlighter-rouge">private</code> and <code class="highlighter-rouge">null</code>.</li> <li>The <code class="highlighter-rouge">privacy</code> field has now been deprecated and should not be used. It’s still returned (mirroring the <code class="highlighter-rouge">visibility</code> field), and writing to it will write to <em>all privacy options</em>.</li> </ul> </li> <li>2020-05-07 <ul> <li>The API (v1) is now formally(ish) defined with OpenAPI v3.0. <a href="https://github.com/xSke/PluralKit/blob/master/PluralKit.API/openapi.yaml">The definition file can be found here.</a></li> </ul> </li> <li>2020-02-10 <ul> <li>Birthdates with no year can now be stored using <code class="highlighter-rouge">0004</code> as a year, for better leap year support. Both options remain valid and either may be returned by the API.</li> <li>Added privacy set/get support, meaning you will now see privacy values in authed requests and can set them.</li> </ul> </li> <li>2020-01-08 <ul> <li>Added privacy support, meaning some responses will now lack information or return 403s, depending on the specific system and member’s privacy settings.</li> </ul> </li> <li>2019-12-28 <ul> <li>Changed behaviour of missing fields in PATCH responses, will now preserve the old value instead of clearing</li> <li>This is technically a breaking change, but not <em>significantly</em> so, so I won’t bump the version number.</li> </ul> </li> <li>2019-10-31 <ul> <li>Added <code class="highlighter-rouge">proxy_tags</code> field to members</li> <li>Added <code class="highlighter-rouge">keep_proxy</code> field to members</li> <li>Deprecated <code class="highlighter-rouge">prefix</code> and <code class="highlighter-rouge">suffix</code> member fields, will be removed at some point (tm)</li> </ul> </li> <li>2019-07-17 <ul> <li>Added endpoint for querying system by account</li> <li>Added endpoint for querying message contents</li> </ul> </li> <li>2019-07-10 <strong>(v1)</strong> <ul> <li>First specified version</li> </ul> </li> <li>(prehistory) <ul> <li>Initial release</li> </ul> </li> </ul> </div> </div> </div> </div> </body> </html>
