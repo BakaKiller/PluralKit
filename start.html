@@ -1,0 +1,443 @@
+<h1 class="no_toc" id="getting-started">Getting Started</h1>
+
+<h2 class="no_toc text-delta" id="table-of-contents">Table of Contents</h2>
+
+<ol id="markdown-toc">
+  <li>
+    <a href="#the-system" id="markdown-toc-the-system">The system</a>
+    <ol>
+      <li>
+        <a href="#parts-of-the-system" id="markdown-toc-parts-of-the-system"
+          >Parts of the system</a
+        >
+      </li>
+      <li>
+        <a href="#creating-a-system" id="markdown-toc-creating-a-system"
+          >Creating a system</a
+        >
+      </li>
+    </ol>
+  </li>
+  <li>
+    <a href="#members" id="markdown-toc-members">Members</a>
+    <ol>
+      <li>
+        <a href="#parts-to-a-member" id="markdown-toc-parts-to-a-member"
+          >Parts to a member</a
+        >
+      </li>
+      <li>
+        <a href="#creating-a-member" id="markdown-toc-creating-a-member"
+          >Creating a member</a
+        >
+      </li>
+    </ol>
+  </li>
+  <li>
+    <a href="#proxies" id="markdown-toc-proxies">Proxies</a>
+    <ol>
+      <li>
+        <a
+          href="#parts-to-a-proxy-message"
+          id="markdown-toc-parts-to-a-proxy-message"
+          >Parts to a proxy message</a
+        >
+      </li>
+      <li>
+        <a href="#parts-to-a-proxy-tag" id="markdown-toc-parts-to-a-proxy-tag"
+          >Parts to a proxy tag</a
+        >
+      </li>
+      <li>
+        <a href="#setting-a-proxy-tag" id="markdown-toc-setting-a-proxy-tag"
+          >Setting a proxy tag</a
+        >
+      </li>
+      <li><a href="#reactions" id="markdown-toc-reactions">Reactions</a></li>
+      <li>
+        <a href="#more-proxy-examples" id="markdown-toc-more-proxy-examples"
+          >More proxy examples</a
+        >
+      </li>
+    </ol>
+  </li>
+</ol>
+
+<h2 id="the-system">The system</h2>
+<p>
+  The first thing you need to do to use PluralKit is to set up a system! Each
+  account can have one system, but you can link one system to multiple accounts.
+  To inspect a system, you can pull up its <em>system card</em>. Below is an
+  example system with all options set, which you can also see by typing
+  <code class="highlighter-rouge">pk;system exmpl</code> on Discord:
+  <img
+    src="/assets/ExampleSystem.png"
+    alt="Example of a filled out system card"
+  />
+</p>
+
+<h3 id="parts-of-the-system">Parts of the system</h3>
+<p>
+  These are the parts of the system, reading the card top to bottom left to
+  right like a book:
+</p>
+<ol>
+  <li>
+    <strong>System name</strong>: The system name is at the top of the system
+    card. On the example system it is <strong>PluralKit Example System</strong>.
+    System names are optional.
+  </li>
+  <li>
+    <strong>Avatar</strong>: This is the system avatar, it is an image that you
+    can put on the system card.
+  </li>
+  <li>
+    <strong>Fronters</strong>: This shows who is currently registered as
+    fronting using the
+    <a href="/guide#managing-switches">switch tracking commands</a>.
+    <a href="/guide#system-privacy">It can be hidden.</a>
+  </li>
+  <li>
+    <strong>Tag</strong>: This is the system tag, and it will be placed after
+    the name of members on proxied messages.
+  </li>
+  <li>
+    <strong>Members</strong>: This is a member count, and you can use
+    <code class="highlighter-rouge">pk;system list</code> to see a list of the
+    members.
+  </li>
+  <li>
+    <strong>Description</strong>: This is the system description, and can be any
+    text you wish to put on your system card.
+  </li>
+  <li>
+    <strong>System ID</strong>: This is the auto-generated ID of the system. You
+    can use this to refer to any system.
+  </li>
+  <li>
+    <strong>Created on</strong>: This is the time and date the system was
+    created on.
+  </li>
+</ol>
+
+<h3 id="creating-a-system">Creating a system</h3>
+<p>
+  You need a system to start creating members, but luckily this is simple! All
+  you need to do is run
+  <code class="highlighter-rouge">pk;system new [name]</code>. So if you wanted
+  your system to be named “Boxes of Foxes” you would run the command
+  <code class="highlighter-rouge">pk;system new Boxes of Foxes</code>! If you
+  don’t want a name, you can use the command
+  <code class="highlighter-rouge">pk;system new</code>, with no extra text. If
+  you want to do tweak the system,
+  <a href="/guide#system-management">see the user guide</a>! This page is just a
+  simple setup guide.
+</p>
+
+<hr />
+
+<h2 id="members">Members</h2>
+<p>
+  Once you have created a system, the next thing you need to get started is to
+  create a member! Like before, here is an example of a full member card with
+  all options used:
+  <img
+    src="/assets/ExampleMember.png"
+    alt="Example of a filled out member card"
+  />
+</p>
+
+<h3 id="parts-to-a-member">Parts to a member</h3>
+<p>
+  These are the parts of a member, reading the card top to bottom left to right
+  like a book:
+</p>
+<ol>
+  <li>
+    <strong>Name and system</strong>: This is the name of the member, in this
+    case “Myriad”, and the system they are part of in brackets, in this case the
+    “PluralKit Example System”.
+  </li>
+  <li>
+    <strong>Avatar</strong>: This is the image that’s used for proxying messages
+    from this member.
+  </li>
+  <li>
+    <strong>Display name</strong>: This is shown in proxy messages on all
+    servers in place of their name if it is set.
+  </li>
+  <li>
+    <strong>Server nickname</strong>: This is like display name, but set for
+    specific servers (in this case the PluralKit support server).
+  </li>
+  <li>
+    <strong>Birthdate</strong>: This is the member’s set birthday, it can be
+    with or without the year.
+  </li>
+  <li>
+    <strong>Pronouns</strong>: This is the member’s pronouns. It’s a free text
+    entry field, so you can put anything you’d like.
+  </li>
+  <li>
+    <strong>Message count</strong>: This is the total number of messages this
+    member has ever sent through proxies.
+  </li>
+  <li>
+    <strong>Proxy tags</strong>: This is a list of the member’s proxy tags. We
+    will go more in depth into them in a bit!
+  </li>
+  <li>
+    <strong>Colour</strong>: This is the member’s colour, it affects the sidebar
+    of the card on the left.
+    <strong
+      >It does not affect the proxy colour, due to a Discord limitation.</strong
+    >
+  </li>
+  <li>
+    <strong>Description</strong>: This is the member description. Similar to the
+    system description, you can put anything you’d like here.
+  </li>
+  <li>
+    <strong>System ID</strong>: This is the ID of the system this member is part
+    of. In this case it’s the ID for the PluralKit Example System we saw above.
+  </li>
+  <li>
+    <strong>Member ID</strong>: This is the auto-generated ID for the member.
+    You can always use this ID to refer to a specific member, even if the name
+    contains hard-to-type characters.
+  </li>
+  <li>
+    <strong>Created on</strong>: This is the date and time the member was
+    created.
+  </li>
+</ol>
+
+<h3 id="creating-a-member">Creating a member</h3>
+<p>
+  This is just as easy as creating a system, but there are a few more things you
+  will want to do immediately after. First you run
+  <code class="highlighter-rouge">pk;member new &lt;name&gt;</code>, so if you
+  want to create a member named Myriad, you would run
+  <code class="highlighter-rouge">pk;member new Myriad</code>. Next, for
+  proxying later, you will want to set an avatar for your new member! This is
+  done simply by using
+  <code class="highlighter-rouge"
+    >pk;member &lt;member&gt; avatar &lt;link to avatar&gt;</code
+  >. For example,
+</p>
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre
+      class="highlight"
+    ><code>pk;member Myriad avatar http://pluralkit.me/assets/myriad.png
+</code></pre>
+  </div>
+</div>
+
+<p>
+  You can also leave out the image link, and instead attach an image with the
+  command. That’ll work too!
+</p>
+
+<p>
+  For more info on what you can do with members, check out
+  <a href="/guide#member-management"
+    >the member management section of the user guide</a
+  >.
+</p>
+
+<hr />
+
+<h2 id="proxies">Proxies</h2>
+<p>
+  Proxies are probably the most important part of PluralKit, they are literally
+  what the bot was made for. Below is an example of a proxied message:
+</p>
+
+<p><img src="/assets/ExampleProxy.png" alt="Example of a proxy message" /></p>
+
+<h3 id="parts-to-a-proxy-message">Parts to a proxy message</h3>
+<ol>
+  <li>
+    <strong>The name</strong>: This is the member’s name, display name, or
+    server nickname, depending on what’s set (server nickname overrides display
+    name, which overrides the normal name). In this case, it’s
+    <strong>Myriad “Big Boss” Kit</strong>.
+  </li>
+  <li>
+    <strong>The system tag</strong>: If a system tag is set, this will will
+    appear right after the name. In this case, it’s
+    <strong>| PluralKit 🦊</strong>.
+  </li>
+  <li>
+    <strong>The BOT badge</strong>: All proxies have this due to how the proxy
+    service works. It’s not possible to remove.
+  </li>
+  <li>
+    <strong>The message</strong>: The message you proxied through the bot - this
+    is what was on the “inside” of the proxy tags, which we will explain below.
+  </li>
+</ol>
+
+<h3 id="parts-to-a-proxy-tag">Parts to a proxy tag</h3>
+<p>
+  A proxy tag is what tells PluralKit how to know to proxy a member. It looks
+  like this:
+</p>
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pretextpost
+</code></pre>
+  </div>
+</div>
+<p>and has 3 parts.</p>
+<ol>
+  <li>
+    <strong>Prefix</strong>: In this case,
+    <code class="highlighter-rouge">pre</code>. This tells PluralKit what to
+    look for at the <strong>start</strong> of the message
+  </li>
+  <li>
+    <strong>Separator</strong>: This is always the word
+    <code class="highlighter-rouge">text</code>, all-lowercase. It tells
+    PluralKit where the prefix ends and the suffix starts.
+  </li>
+  <li>
+    <strong>Suffix</strong>: In this case,
+    <code class="highlighter-rouge">post</code>. This tells PluralKit to what to
+    look for at the <strong>end</strong> of a message
+  </li>
+</ol>
+
+<p>
+  You can imagine that this is an “example proxy”, where the intended message is
+  the word <code class="highlighter-rouge">text</code>.
+</p>
+
+<p>In this example, typing a message such as</p>
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pre This is an example message post
+</code></pre>
+  </div>
+</div>
+<p>would result in the message “This is an example message” being proxied.</p>
+
+<h3 id="setting-a-proxy-tag">Setting a proxy tag</h3>
+<p>
+  To set a proxy tag you need to know 3 things. The member you wish to set the
+  tags for, the prefix for the tag, and the suffix for the tag. Once you know
+  these things you can run the command:
+</p>
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;member [member] proxy [prefix]text[suffix]
+</code></pre>
+  </div>
+</div>
+<p>
+  For example, if you want messages starting with
+  <code class="highlighter-rouge">{</code> and ending with
+  <code class="highlighter-rouge">}</code> to be proxied by Myriad, you could
+  run
+</p>
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;member Myriad proxy {text}
+</code></pre>
+  </div>
+</div>
+<p>
+  Now when you type a message such as
+  <code class="highlighter-rouge">{this is an example message}</code> it will be
+  proxied by Myriad.
+</p>
+
+<p>
+  You do not need both to set it. If you do not set a prefix or a suffix, it
+  will not care what is at the start or end of the message respectively. For
+  more examples <a href="#more-proxy-examples">click here</a>
+</p>
+
+<p>
+  For a more detailed guide on proxying, have a look at the
+  <a href="/guide#proxying">proxying section of the user guide</a>.
+</p>
+
+<h3 id="reactions">Reactions</h3>
+<p>
+  When you come across a proxied message, or you have proxied a message, there
+  are a few handy reactions you can add to the message for some more
+  functionality!
+</p>
+
+<p>
+  ❌ (red X): This reaction will cause the message to be deleted, but only if
+  you are using the account that sent the message.
+</p>
+
+<p>
+  ❓ (question mark): This reaction will DM you a message containing details on
+  who sent the message, the member that it proxied, and the system it was from.
+  When you react with this, you will receive a DM that looks like this:
+  <img src="/assets/ExampleQuery.png" alt="Example of a message query" />
+</p>
+
+<p>
+  ❗ (exclamation mark): This reaction will send a message to the channel the
+  proxied message was sent in, pinging both you and the sender of the message.
+  That message will look like this:
+  <img src="/assets/ExamplePing.png" alt="Example of a message query" />
+</p>
+
+<h3 id="more-proxy-examples">More proxy examples</h3>
+<p>
+  How to read these examples: The smaller code block with “Example Message” in
+  it is the message you would like to proxy, the larger code block immediately
+  after it is the command you would need to set the member Myriad to respond to
+  that proxy
+</p>
+
+<p><code class="highlighter-rouge">Example message - Myriad</code></p>
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;member Myriad proxy text- Myriad
+</code></pre>
+  </div>
+</div>
+
+<p><code class="highlighter-rouge">M. Example message</code></p>
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;member Myriad proxy M.text
+</code></pre>
+  </div>
+</div>
+
+<p><code class="highlighter-rouge">🎩Example message</code></p>
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;member Myriad proxy 🎩text
+</code></pre>
+  </div>
+</div>
+<p>
+  <em>Note: Custom emojis do work, but look a bit weird in the text form</em>
+</p>
+
+<p><code class="highlighter-rouge">-- Example message --</code></p>
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;member Myriad proxy -- text --
+</code></pre>
+  </div>
+</div>
+<p>
+  <em
+    >Note: Having a space between the prefix/suffix and
+    <code class="highlighter-rouge">text</code> will mean that the space is
+    required. In this example
+    <code class="highlighter-rouge">--Example message--</code> will not
+    proxy.</em
+  >
+</p>

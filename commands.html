@@ -1,0 +1,360 @@
+<h1 id="how-to-read-this">How to read this</h1>
+<p>
+  Words in <strong>&lt;angle brackets&gt;</strong> or
+  <strong>[square brackets]</strong> mean fill-in-the-blank. Square brackets
+  mean this is optional. Don’t include the actual brackets.
+</p>
+
+<h1 id="commands">Commands</h1>
+<h2 id="system-commands">System commands</h2>
+<p>
+  <em
+    >Optionally replace <code class="highlighter-rouge">[system]</code> with a
+    @mention, Discord account ID, or 5-character ID. For most commands, adding
+    <code class="highlighter-rouge">-clear</code> will clear/delete the
+    field.</em
+  >
+</p>
+<ul>
+  <li>
+    <code class="highlighter-rouge">pk;system [id]</code> - Shows information
+    about a system.
+  </li>
+  <li>
+    <code class="highlighter-rouge">pk;system new [name]</code> - Creates a new
+    system registered to your account.
+  </li>
+  <li>
+    <code class="highlighter-rouge">pk;system rename [new name]</code> - Changes
+    the name of your system.
+  </li>
+  <li>
+    <code class="highlighter-rouge">pk;system description [description]</code> -
+    Changes the description of your system.
+  </li>
+  <li>
+    <code class="highlighter-rouge">pk;system avatar [avatar url]</code> -
+    Changes the avatar of your system.
+  </li>
+  <li>
+    <code class="highlighter-rouge">pk;system privacy</code> - Displays your
+    system’s current privacy settings.
+  </li>
+  <li>
+    <code class="highlighter-rouge"
+      >pk;system privacy &lt;subject&gt; &lt;public|private&gt;</code
+    >
+    - Changes your systems privacy settings.
+  </li>
+  <li>
+    <code class="highlighter-rouge">pk;system tag [tag]</code> - Changes the
+    system tag of your system.
+  </li>
+  <li>
+    <code class="highlighter-rouge">pk;system timezone [location]</code> -
+    Changes the time zone of your system.
+  </li>
+  <li>
+    <code class="highlighter-rouge">pk;system proxy [on|off]</code> - Toggles
+    message proxying for a specific server.
+  </li>
+  <li>
+    <code class="highlighter-rouge">pk;system delete</code> - Deletes your
+    system.
+  </li>
+  <li>
+    <code class="highlighter-rouge">pk;system [system] fronter</code> - Shows
+    the current fronter of a system.
+  </li>
+  <li>
+    <code class="highlighter-rouge">pk;system [system] fronthistory</code> -
+    Shows the last 10 fronters of a system.
+  </li>
+  <li>
+    <code class="highlighter-rouge"
+      >pk;system [system] frontpercent [timeframe]</code
+    >
+    - Shows the aggregated front history of a system within a given time frame.
+  </li>
+  <li>
+    <code class="highlighter-rouge">pk;system [system] list</code> - Shows a
+    paginated list of a system’s members.
+  </li>
+  <li>
+    <code class="highlighter-rouge">pk;system [system] list -full</code> - Shows
+    a paginated list of a system’s members, with increased detail.
+  </li>
+  <li>
+    <code class="highlighter-rouge">pk;find &lt;search term&gt;</code> -
+    Searches members by name.
+  </li>
+  <li>
+    <code class="highlighter-rouge"
+      >pk;system [system] find &lt;search term&gt;</code
+    >
+    - (same as above, but for a specific system)
+  </li>
+  <li>
+    <code class="highlighter-rouge">pk;autoproxy [off|front|latch|member]</code>
+    - Updates the system’s autoproxy settings for a given server.
+  </li>
+  <li>
+    <code class="highlighter-rouge">pk;link &lt;account&gt;</code> - Links this
+    system to a different account.
+  </li>
+  <li>
+    <code class="highlighter-rouge">pk;unlink [account]</code> - Unlinks an
+    account from this system.
+  </li>
+</ul>
+
+<h2 id="member-commands">Member commands</h2>
+<p>
+  <em
+    >Replace <code class="highlighter-rouge">&lt;name&gt;</code> with a member’s
+    name or 5-character ID. For most commands, adding
+    <code class="highlighter-rouge">-clear</code> will clear/delete the
+    field.</em
+  >
+</p>
+<ul>
+  <li>
+    <code class="highlighter-rouge">pk;member &lt;name&gt;</code> - Shows
+    information about a member.
+  </li>
+  <li>
+    <code class="highlighter-rouge">pk;member new &lt;name&gt;</code> - Creates
+    a new system member.
+  </li>
+  <li>
+    <code class="highlighter-rouge"
+      >pk;member &lt;name&gt; rename &lt;new name&gt;</code
+    >
+    - Changes the name of a member.
+  </li>
+  <li>
+    <code class="highlighter-rouge"
+      >pk;member &lt;name&gt; displayname &lt;new display name&gt;</code
+    >
+    - Changes the display name of a member.
+  </li>
+  <li>
+    <code class="highlighter-rouge"
+      >pk;member &lt;name&gt; servername &lt;new server name&gt;</code
+    >
+    - Changes the display name of a member, only in the current server.
+  </li>
+  <li>
+    <code class="highlighter-rouge"
+      >pk;member &lt;name&gt; description [description]</code
+    >
+    - Changes the description of a member.
+  </li>
+  <li>
+    <code class="highlighter-rouge"
+      >pk;member &lt;name&gt; avatar &lt;avatar url|@mention&gt;</code
+    >
+    - Changes the avatar of a member.
+  </li>
+  <li>
+    <code class="highlighter-rouge"
+      >pk;member &lt;name&gt; serveravatar &lt;avatar url|@mention&gt;</code
+    >
+    - Changes the avatar of a member in a specific server.
+  </li>
+  <li>
+    <code class="highlighter-rouge">pk;member &lt;name&gt; privacy</code> -
+    Displays a members current privacy settings.
+  </li>
+  <li>
+    <code class="highlighter-rouge"
+      >pk;member &lt;name&gt; privacy &lt;subject&gt;
+      &lt;public|private&gt;</code
+    >
+    - Changes a members privacy setting.
+  </li>
+  <li>
+    <code class="highlighter-rouge">pk;member &lt;name&gt; proxy [tags]</code> -
+    Changes the proxy tags of a member. use below add/remove commands for
+    members with multiple tag pairs.
+  </li>
+  <li>
+    <code class="highlighter-rouge"
+      >pk;member &lt;name&gt; proxy add [tags]</code
+    >
+    - Adds a proxy tag pair to a member.
+  </li>
+  <li>
+    <code class="highlighter-rouge"
+      >pk;member &lt;name&gt; proxy remove [tags]</code
+    >
+    - Removes a proxy tag from a member.
+  </li>
+  <li>
+    <code class="highlighter-rouge"
+      >pk;member &lt;name&gt; keepproxy [on|off]</code
+    >
+    - Sets whether to include a member’s proxy tags in the proxied message.
+  </li>
+  <li>
+    <code class="highlighter-rouge"
+      >pk;member &lt;name&gt; pronouns [pronouns]</code
+    >
+    - Changes the pronouns of a member.
+  </li>
+  <li>
+    <code class="highlighter-rouge">pk;member &lt;name&gt; color [color]</code>
+    - Changes the color of a member.
+  </li>
+  <li>
+    <code class="highlighter-rouge"
+      >pk;member &lt;name&gt; birthdate [birthdate]</code
+    >
+    - Changes the birthday of a member.
+  </li>
+  <li>
+    <code class="highlighter-rouge">pk;member &lt;name&gt; delete</code> -
+    Deletes a member.
+  </li>
+  <li>
+    <code class="highlighter-rouge">pk;random</code> - Shows the member card of
+    a randomly selected member in your system.
+  </li>
+</ul>
+
+<h2 id="switching-commands">Switching commands</h2>
+<ul>
+  <li>
+    <code class="highlighter-rouge">pk;switch [member...]</code> - Registers a
+    switch with the given members.
+  </li>
+  <li>
+    <code class="highlighter-rouge">pk;switch move &lt;time&gt;</code> - Moves
+    the latest switch backwards in time.
+  </li>
+  <li>
+    <code class="highlighter-rouge">pk;switch delete</code> - Deletes the latest
+    switch.
+  </li>
+  <li>
+    <code class="highlighter-rouge">pk;switch delete all</code> - Deletes every
+    logged switch.
+  </li>
+  <li>
+    <code class="highlighter-rouge">pk;switch out</code> - Registers a
+    ‘switch-out’ - a switch with no associated members.
+  </li>
+</ul>
+
+<h2 id="server-owner-commands">Server owner commands</h2>
+<p><em>(all commands here require Manage Server permission)</em></p>
+<ul>
+  <li>
+    <code class="highlighter-rouge">pk;log channel &lt;channel&gt;</code> - Sets
+    the given channel to log all proxied messages.
+  </li>
+  <li>
+    <code class="highlighter-rouge"
+      >pk;log disable &lt;#channel&gt; [#channel...]</code
+    >
+    - Disables logging messages posted in the given channel(s) (useful for staff
+    channels and such).
+  </li>
+  <li>
+    <code class="highlighter-rouge"
+      >pk;log enable &lt;#channel&gt; [#channel...]</code
+    >
+    - Re-enables logging messages posted in the given channel(s).
+  </li>
+  <li>
+    <code class="highlighter-rouge">pk;logclean &lt;on/off&gt;</code> - Enables
+    or disables <a href="/guide#log-cleanup">log cleanup</a>.
+  </li>
+  <li>
+    <code class="highlighter-rouge"
+      >pk;blacklist add &lt;#channel&gt; [#channel...]</code
+    >
+    - Adds the given channel(s) to the proxy blacklist (proxying will be
+    disabled here)
+  </li>
+  <li>
+    <code class="highlighter-rouge"
+      >pk;blacklist remove &lt;#channel&gt; [#channel...]</code
+    >
+    - Removes the given channel(s) from the proxy blacklist.
+  </li>
+</ul>
+
+<h2 id="utility">Utility</h2>
+<ul>
+  <li>
+    <code class="highlighter-rouge"
+      >pk;message &lt;message id / message link&gt;</code
+    >
+    - Looks up information about a proxied message by its message ID or link.
+  </li>
+  <li>
+    <code class="highlighter-rouge">pk;invite</code> - Sends the bot invite link
+    for PluralKit.
+  </li>
+  <li>
+    <code class="highlighter-rouge">pk;import</code> - Imports a data file from
+    PluralKit or Tupperbox.
+  </li>
+  <li>
+    <code class="highlighter-rouge">pk;export</code> - Exports a data file
+    containing your system information.
+  </li>
+  <li>
+    <code class="highlighter-rouge">pk;permcheck [server id]</code> -
+    <a href="/tips#permission-checker-command"
+      >Checks the given server’s permission setup</a
+    >
+    to check if it’s compatible with PluralKit.
+  </li>
+</ul>
+
+<h2 id="api">API</h2>
+<p>
+  <em
+    >(for using the <a href="/api">PluralKit API</a>, useful for developers)</em
+  >
+</p>
+<ul>
+  <li>
+    <code class="highlighter-rouge">pk;token</code> - DMs you a token for using
+    the PluralKit API.
+  </li>
+  <li>
+    <code class="highlighter-rouge">pk;token refresh</code> - Refreshes your API
+    token and invalidates the old one.
+  </li>
+</ul>
+
+<h2 id="help">Help</h2>
+<ul>
+  <li>
+    <code class="highlighter-rouge">pk;help</code> - Displays a basic help
+    message describing how to use the bot.
+  </li>
+  <li>
+    <code class="highlighter-rouge">pk;help proxy</code> - Directs you to
+    <a href="/guide#proxying">this page</a>.
+  </li>
+  <li>
+    <code class="highlighter-rouge">pk;system help</code> - Lists system-related
+    commands.
+  </li>
+  <li>
+    <code class="highlighter-rouge">pk;member help</code> - Lists member-related
+    commands.
+  </li>
+  <li>
+    <code class="highlighter-rouge">pk;switch help</code> - Lists switch-related
+    commands.
+  </li>
+  <li>
+    <code class="highlighter-rouge">pk;commands</code> - Directs you to this
+    page!
+  </li>
+</ul>

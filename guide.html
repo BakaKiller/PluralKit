@@ -1,0 +1,1654 @@
+<h1 class="no_toc" id="user-guide">User Guide</h1>
+
+<h2 class="no_toc text-delta" id="table-of-contents">Table of Contents</h2>
+
+<ol id="markdown-toc">
+  <li>
+    <a
+      href="#adding-the-bot-to-your-server"
+      id="markdown-toc-adding-the-bot-to-your-server"
+      >Adding the bot to your server</a
+    >
+  </li>
+  <li>
+    <a href="#system-management" id="markdown-toc-system-management"
+      >System management</a
+    >
+    <ol>
+      <li>
+        <a href="#creating-a-system" id="markdown-toc-creating-a-system"
+          >Creating a system</a
+        >
+      </li>
+      <li>
+        <a
+          href="#viewing-information-about-a-system"
+          id="markdown-toc-viewing-information-about-a-system"
+          >Viewing information about a system</a
+        >
+      </li>
+      <li>
+        <a href="#system-description" id="markdown-toc-system-description"
+          >System description</a
+        >
+      </li>
+      <li>
+        <a href="#system-avatars" id="markdown-toc-system-avatars"
+          >System avatars</a
+        >
+      </li>
+      <li>
+        <a href="#system-tags" id="markdown-toc-system-tags">System tags</a>
+      </li>
+      <li>
+        <a
+          href="#adding-or-removing-discord-accounts-to-the-system"
+          id="markdown-toc-adding-or-removing-discord-accounts-to-the-system"
+          >Adding or removing Discord accounts to the system</a
+        >
+      </li>
+      <li>
+        <a
+          href="#setting-a-system-time-zone"
+          id="markdown-toc-setting-a-system-time-zone"
+          >Setting a system time zone</a
+        >
+      </li>
+      <li>
+        <a href="#deleting-a-system" id="markdown-toc-deleting-a-system"
+          >Deleting a system</a
+        >
+      </li>
+    </ol>
+  </li>
+  <li>
+    <a href="#member-management" id="markdown-toc-member-management"
+      >Member management</a
+    >
+    <ol>
+      <li>
+        <a href="#creating-a-member" id="markdown-toc-creating-a-member"
+          >Creating a member</a
+        >
+      </li>
+      <li>
+        <a
+          href="#looking-up-member-info"
+          id="markdown-toc-looking-up-member-info"
+          >Looking up member info</a
+        >
+      </li>
+      <li>
+        <a
+          href="#listing-system-members"
+          id="markdown-toc-listing-system-members"
+          >Listing system members</a
+        >
+      </li>
+      <li>
+        <a href="#member-renaming" id="markdown-toc-member-renaming"
+          >Member renaming</a
+        >
+      </li>
+      <li>
+        <a href="#member-display-names" id="markdown-toc-member-display-names"
+          >Member display names</a
+        >
+      </li>
+      <li>
+        <a
+          href="#member-server-display-names"
+          id="markdown-toc-member-server-display-names"
+          >Member server display names</a
+        >
+      </li>
+      <li>
+        <a href="#member-description" id="markdown-toc-member-description"
+          >Member description</a
+        >
+      </li>
+      <li>
+        <a href="#member-color" id="markdown-toc-member-color">Member color</a>
+      </li>
+      <li>
+        <a href="#member-avatar" id="markdown-toc-member-avatar"
+          >Member avatar</a
+        >
+      </li>
+      <li>
+        <a href="#member-server-avatar" id="markdown-toc-member-server-avatar"
+          >Member server avatar</a
+        >
+      </li>
+      <li>
+        <a href="#member-pronouns" id="markdown-toc-member-pronouns"
+          >Member pronouns</a
+        >
+      </li>
+      <li>
+        <a href="#member-birthdate" id="markdown-toc-member-birthdate"
+          >Member birthdate</a
+        >
+      </li>
+      <li>
+        <a href="#deleting-members" id="markdown-toc-deleting-members"
+          >Deleting members</a
+        >
+      </li>
+    </ol>
+  </li>
+  <li>
+    <a href="#proxying" id="markdown-toc-proxying">Proxying</a>
+    <ol>
+      <li>
+        <a href="#setting-up-proxy-tags" id="markdown-toc-setting-up-proxy-tags"
+          >Setting up proxy tags</a
+        >
+      </li>
+      <li>
+        <a
+          href="#using-multiple-distinct-proxy-tag-pairs"
+          id="markdown-toc-using-multiple-distinct-proxy-tag-pairs"
+          >Using multiple distinct proxy tag pairs</a
+        >
+      </li>
+      <li>
+        <a
+          href="#keeping-your-proxy-tags"
+          id="markdown-toc-keeping-your-proxy-tags"
+          >Keeping your proxy tags</a
+        >
+      </li>
+      <li>
+        <a
+          href="#querying-message-information"
+          id="markdown-toc-querying-message-information"
+          >Querying message information</a
+        >
+      </li>
+      <li>
+        <a
+          href="#pinging-a-specific-user"
+          id="markdown-toc-pinging-a-specific-user"
+          >Pinging a specific user</a
+        >
+      </li>
+      <li>
+        <a
+          href="#disabling-proxying-on-a-per-server-basis"
+          id="markdown-toc-disabling-proxying-on-a-per-server-basis"
+          >Disabling proxying on a per-server basis</a
+        >
+      </li>
+      <li>
+        <a href="#deleting-messages" id="markdown-toc-deleting-messages"
+          >Deleting messages</a
+        >
+      </li>
+      <li>
+        <a href="#autoproxying" id="markdown-toc-autoproxying">Autoproxying</a>
+        <ol>
+          <li>
+            <a href="#front-mode" id="markdown-toc-front-mode">Front mode</a>
+          </li>
+          <li>
+            <a href="#latch-mode" id="markdown-toc-latch-mode">Latch mode</a>
+          </li>
+          <li>
+            <a href="#member-mode" id="markdown-toc-member-mode">Member mode</a>
+          </li>
+        </ol>
+      </li>
+    </ol>
+  </li>
+  <li>
+    <a href="#managing-switches" id="markdown-toc-managing-switches"
+      >Managing switches</a
+    >
+    <ol>
+      <li>
+        <a href="#logging-switches" id="markdown-toc-logging-switches"
+          >Logging switches</a
+        >
+      </li>
+      <li>
+        <a href="#switching-out" id="markdown-toc-switching-out"
+          >Switching out</a
+        >
+      </li>
+      <li>
+        <a href="#moving-switches" id="markdown-toc-moving-switches"
+          >Moving switches</a
+        >
+      </li>
+      <li>
+        <a href="#delete-switches" id="markdown-toc-delete-switches"
+          >Delete switches</a
+        >
+      </li>
+      <li>
+        <a href="#querying-fronter" id="markdown-toc-querying-fronter"
+          >Querying fronter</a
+        >
+      </li>
+      <li>
+        <a
+          href="#querying-front-history"
+          id="markdown-toc-querying-front-history"
+          >Querying front history</a
+        >
+      </li>
+      <li>
+        <a
+          href="#querying-front-percentage"
+          id="markdown-toc-querying-front-percentage"
+          >Querying front percentage</a
+        >
+      </li>
+    </ol>
+  </li>
+  <li>
+    <a href="#privacy" id="markdown-toc-privacy">Privacy</a>
+    <ol>
+      <li>
+        <a href="#system-privacy" id="markdown-toc-system-privacy"
+          >System privacy</a
+        >
+      </li>
+      <li>
+        <a href="#member-privacy" id="markdown-toc-member-privacy"
+          >Member privacy</a
+        >
+      </li>
+    </ol>
+  </li>
+  <li>
+    <a href="#moderation-commands" id="markdown-toc-moderation-commands"
+      >Moderation commands</a
+    >
+    <ol>
+      <li>
+        <a href="#log-channel" id="markdown-toc-log-channel">Log channel</a>
+      </li>
+      <li>
+        <a href="#channel-blacklisting" id="markdown-toc-channel-blacklisting"
+          >Channel blacklisting</a
+        >
+      </li>
+      <li>
+        <a href="#log-cleanup" id="markdown-toc-log-cleanup">Log cleanup</a>
+      </li>
+    </ol>
+  </li>
+  <li>
+    <a
+      href="#importing-and-exporting-data"
+      id="markdown-toc-importing-and-exporting-data"
+      >Importing and exporting data</a
+    >
+    <ol>
+      <li>
+        <a
+          href="#importing-from-tupperbox"
+          id="markdown-toc-importing-from-tupperbox"
+          >Importing from Tupperbox</a
+        >
+      </li>
+      <li>
+        <a
+          href="#importing-from-pluralkit"
+          id="markdown-toc-importing-from-pluralkit"
+          >Importing from PluralKit</a
+        >
+      </li>
+      <li>
+        <a
+          href="#exporting-your-pluralkit-data"
+          id="markdown-toc-exporting-your-pluralkit-data"
+          >Exporting your PluralKit data</a
+        >
+      </li>
+    </ol>
+  </li>
+</ol>
+
+<h2 id="adding-the-bot-to-your-server">Adding the bot to your server</h2>
+<p>
+  If you want to use PluralKit on a Discord server, you must first
+  <em>add</em> it to the server in question. For this, you’ll need the
+  <em>Manage Server</em> permission on there.
+</p>
+
+<p>Use this link to add the bot to your server:</p>
+
+<p>
+  <a
+    href="https://discord.com/oauth2/authorize?client_id=466378653216014359&amp;scope=bot&amp;permissions=536995904"
+    >https://discord.com/oauth2/authorize?client_id=466378653216014359&amp;scope=bot&amp;permissions=536995904</a
+  >
+</p>
+
+<p>
+  Once you go through the wizard, the bot account will automatically join the
+  server you’ve chosen. Please ensure the bot has the <em>Read Messages</em>,
+  <em>Send Messages</em>, <em>Manage Messages</em>, <em>Attach Files</em> and
+  <em>Manage Webhooks</em> permission in the channels you want it to work in.
+</p>
+
+<h2 id="system-management">System management</h2>
+<p>
+  In order to do most things with the PluralKit bot, you’ll need to have a
+  system registered with it. A <em>system</em> is a collection of
+  <em>system members</em> that may be used by one or more
+  <em>Discord accounts</em>.
+</p>
+
+<h3 id="creating-a-system">Creating a system</h3>
+<p>
+  If you do not already have a system registered, use the following command to
+  create one:
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;system new
+</code></pre>
+  </div>
+</div>
+
+<p>
+  Optionally, you can attach a <em>system name</em>, which will be displayed in
+  various information cards, like so:
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;system new My System Name
+</code></pre>
+  </div>
+</div>
+
+<h3 id="viewing-information-about-a-system">
+  Viewing information about a system
+</h3>
+<p>To view information about your own system, simply type:</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;system
+</code></pre>
+  </div>
+</div>
+
+<p>
+  To view information about <em>a different</em> system, there are a number of
+  ways to do so. You can either look up a system by @mention, by account ID, or
+  by system ID. For example:
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;system @Craig#5432
+pk;system 466378653216014359
+pk;system abcde
+</code></pre>
+  </div>
+</div>
+
+<h3 id="system-description">System description</h3>
+<p>
+  If you’d like to add a small blurb to your system information card, you can
+  add a <em>system description</em>. To do so, use the
+  <code class="highlighter-rouge">pk;system description</code> command, as
+  follows:
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre
+      class="highlight"
+    ><code>pk;system description This is my system description. Hello. Lorem ipsum dolor sit amet.
+</code></pre>
+  </div>
+</div>
+
+<p>
+  There’s a 1000 character length limit on your system description - which is
+  quite a lot!
+</p>
+
+<p>
+  If you’d like to remove your system description, just type
+  <code class="highlighter-rouge">pk;system description</code> without any
+  further parameters.
+</p>
+
+<h3 id="system-avatars">System avatars</h3>
+<p>
+  If you’d like your system to have an associated “system avatar”, displayed on
+  your system information card, you can add a system avatar. To do so, use the
+  <code class="highlighter-rouge">pk;system avatar</code> command. You can
+  either supply it with an direct URL to an image, or attach an image directly.
+  For example.
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;system avatar http://placebeard.it/512.jpg
+pk;system avatar [with attached image]
+</code></pre>
+  </div>
+</div>
+
+<p>
+  To clear your avatar, simply type
+  <code class="highlighter-rouge">pk;system avatar</code> with no attachment or
+  link.
+</p>
+
+<h3 id="system-tags">System tags</h3>
+<p>
+  Your system tag is a little snippet of text that’ll be added to the end of all
+  proxied messages. For example, if you want to proxy a member named
+  <code class="highlighter-rouge">James</code>, and your system tag is
+  <code class="highlighter-rouge">| The Boys</code>, the final name displayed
+  will be <code class="highlighter-rouge">James | The Boys</code>. This is
+  useful for identifying your system in-chat, and some servers may require you
+  use a system tag. Note that emojis <em>are</em> supported! To set one, use the
+  <code class="highlighter-rouge">pk;system tag</code> command, like so:
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;system tag | The Boys
+pk;system tag (Test System)
+pk;system tag 🛰️
+</code></pre>
+  </div>
+</div>
+
+<p>
+  If you want to remove your system tag, just type
+  <code class="highlighter-rouge">pk;system tag</code> with no extra parameters.
+</p>
+
+<p>
+  <strong>NB:</strong> When proxying, the <em>total webhook username</em> must
+  be 32 characters or below. As such, if you have a long system name, your tag
+  might be enough to bump it over that limit. PluralKit will warn you if you
+  have a member name/tag combination that will bring the combined username above
+  the limit. You can either make the member name or the system tag shorter to
+  solve this.
+</p>
+
+<h3 id="adding-or-removing-discord-accounts-to-the-system">
+  Adding or removing Discord accounts to the system
+</h3>
+<p>
+  If you have multiple Discord accounts you want to use the same system on, you
+  don’t need to create multiple systems. Instead, you can <em>link</em> the same
+  system to multiple accounts.
+</p>
+
+<p>
+  Let’s assume the account you want to link to is called @Craig#5432. You’d link
+  it to your <em>current</em> system by running this command from an account
+  that already has access to the system:
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;link @Craig#5432
+</code></pre>
+  </div>
+</div>
+
+<p>
+  PluralKit will require you to confirm the link by clicking on a reaction
+  <em>from the other account</em>.
+</p>
+
+<p>If you now want to unlink that account, use the following command:</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;unlink @Craig#5432
+</code></pre>
+  </div>
+</div>
+
+<p>
+  You may not remove the only account linked to a system, as that would leave
+  the system inaccessible. Both the
+  <code class="highlighter-rouge">pk;link</code> and
+  <code class="highlighter-rouge">pk;unlink</code> commands work with account
+  IDs instead of @mentions, too.
+</p>
+
+<h3 id="setting-a-system-time-zone">Setting a system time zone</h3>
+<p>
+  PluralKit defaults to showing dates and times in
+  <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">UTC</a>. If
+  you’d like, you can set a <em>system time zone</em>, and as such every date
+  and time displayed in PluralKit (on behalf of your system) will be in the
+  system time zone. To do so, use the
+  <code class="highlighter-rouge">pk;system timezone</code> command, like so:
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;system timezone Europe/Copenhagen
+pk;system timezone America/New_York
+pk;system timezone DE
+pk;system timezone 🇬🇧
+</code></pre>
+  </div>
+</div>
+
+<p>
+  You can specify time zones in various ways. In regions with large amounts of
+  time zones (eg. the Americas, Europe, etc), specifying an exact time zone code
+  is the best way. To get your local time zone code, visit
+  <a href="https://xske.github.io/tz">this site</a>. You can see the full list
+  <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones"
+    >here, on Wikipedia</a
+  >
+  (see the column <em>TZ database name</em>). You can also search by country
+  code, either by giving the two-character
+  <a
+    href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements"
+    ><em>ISO-3166-1 alpha-2</em> country code</a
+  >
+  (eg. <code class="highlighter-rouge">GB</code> or
+  <code class="highlighter-rouge">DE</code>), or just by a country flag emoji.
+</p>
+
+<p>
+  To clear a time zone, type
+  <code class="highlighter-rouge">pk;system timezone</code> without any
+  parameters.
+</p>
+
+<h3 id="deleting-a-system">Deleting a system</h3>
+<p>If you want to delete your own system, simply use the command:</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;system delete
+</code></pre>
+  </div>
+</div>
+
+<p>
+  You will need to verify by typing the system’s ID when the bot prompts you to
+  - to prevent accidental deletions.
+</p>
+
+<h2 id="member-management">Member management</h2>
+
+<p>
+  In order to do most things related to PluralKit, you need to work with
+  <em>system members</em>.
+</p>
+
+<p>
+  Most member commands follow the format of
+  <code class="highlighter-rouge">pk;member MemberName verb Parameter</code>.
+  Note that if a member’s name has multiple words, you’ll need to enclose it in
+  “double quotes” throughout the commands below.
+</p>
+
+<h3 id="creating-a-member">Creating a member</h3>
+<p>
+  You can’t do much with PluralKit without having registered members with your
+  system, but doing so is quite simple - just use the
+  <code class="highlighter-rouge">pk;member new</code> command followed by the
+  member’s name, like so:
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;member new John
+pk;member new Craig Smith
+</code></pre>
+  </div>
+</div>
+
+<p>
+  As the one exception to the rule above, if the name consists of multiple words
+  you must <em>not</em> enclose it in double quotes.
+</p>
+
+<h3 id="looking-up-member-info">Looking up member info</h3>
+<p>
+  To view information about a member, there are a couple ways to do it. Either
+  you can address a member by their name (if they’re in your own system), or by
+  their 5-character <em>member ID</em>, like so:
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;member John
+pk;member qazws
+</code></pre>
+  </div>
+</div>
+
+<p>
+  Member IDs are the only way to address a member in another system, and you can
+  find it in various places - for example the system’s member list, or on a
+  message info card gotten by reacting to messages with a question mark.
+</p>
+
+<h3 id="listing-system-members">Listing system members</h3>
+<p>
+  To list all the members in a system, use the
+  <code class="highlighter-rouge">pk;system list</code> command. This will show
+  a paginated list of all member names in the system. You can either run it on
+  your own system, or another - like so:
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;system list
+pk;system @Craig#5432 list
+pk;system qazws list
+</code></pre>
+  </div>
+</div>
+
+<p>
+  If you want a more detailed list, with fields such as pronouns and
+  description, add the word <code class="highlighter-rouge">full</code> to the
+  end of the command, like so:
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;system list full
+pk;system @Craig#5432 list full
+pk;system qazws list full
+</code></pre>
+  </div>
+</div>
+
+<h3 id="member-renaming">Member renaming</h3>
+<p>
+  If you want to change the name of a member, you can use the
+  <code class="highlighter-rouge">pk;member rename</code> command, like so:
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;member John rename Joanne
+pk;member "Craig Smith" rename "Craig Johnson"
+</code></pre>
+  </div>
+</div>
+
+<h3 id="member-display-names">Member display names</h3>
+<p>
+  Normally, when proxying a member, the name displayed in the proxied message
+  will be the member’s name. However, in some cases you may want to display a
+  different name. For example, you may want to include a member’s pronouns
+  inside the proxied name, indicate a subsystem, include emojis or symbols that
+  don’t play nice with the command syntax, or just in general show a different
+  name from the member’s “canonical” name.
+</p>
+
+<p>
+  In such cases you can set the member’s <em>display name</em>. Which will,
+  well, display that name instead. You can set a display name using the
+  <code class="highlighter-rouge">pk;member displayname</code> command, like so:
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;member John displayname Jonathan
+pk;member Robert displayname Bob (he/him)
+</code></pre>
+  </div>
+</div>
+
+<p>
+  To remove a display name, just use the same command with no last parameter,
+  eg:
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;member John displayname
+</code></pre>
+  </div>
+</div>
+
+<p>
+  This will remove the display name, and thus the member will be proxied with
+  their canonical name.
+</p>
+
+<h3 id="member-server-display-names">Member server display names</h3>
+<p>
+  If you’d like to set a display name (as above), but only for a specific
+  server, you can set the member’s <em>server display name</em>. This functions
+  just like global display names, but only in the same server you set them in.
+  For example:
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;member John servername AdminJohn
+</code></pre>
+  </div>
+</div>
+
+<p>
+  The server name applies to the same server you run the command in, so
+  naturally this command doesn’t function in DMs (as you cannot proxy in DMs).
+</p>
+
+<h3 id="member-description">Member description</h3>
+<p>
+  In the same way as a system can have a description, so can a member. You can
+  set a description using the
+  <code class="highlighter-rouge">pk;member description</code> command, like so:
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre
+      class="highlight"
+    ><code>pk;member John description John is a very cool person, and you should give him hugs.
+</code></pre>
+  </div>
+</div>
+
+<p>
+  As with system descriptions, the member description has a 1000 character
+  length limit. To clear a member description, use the command with no
+  additional parameters (eg.
+  <code class="highlighter-rouge">pk;member John description</code>).
+</p>
+
+<h3 id="member-color">Member color</h3>
+<p>
+  A system member can have an associated color value. This color is
+  <em>not</em> displayed as a name color on proxied messages due to a Discord
+  limitation, but it’s shown in member cards, and it can be used in third-party
+  apps, too. To set a member color, use the
+  <code class="highlighter-rouge">pk;member color</code> command with
+  <a href="https://htmlcolorcodes.com/">a hexadecimal color code</a>, like so:
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;member John color #ff0000
+pk;member John color #87ceeb
+</code></pre>
+  </div>
+</div>
+
+<p>
+  To clear a member color, use the command with no color code argument (eg.
+  <code class="highlighter-rouge">pk;member John color</code>).
+</p>
+
+<h3 id="member-avatar">Member avatar</h3>
+<p>
+  If you want your member to have an associated avatar to display on the member
+  information card and on proxied messages, you can set the member avatar. To do
+  so, use the <code class="highlighter-rouge">pk;member avatar</code> command.
+  You can either supply it with an direct URL to an image, or attach an image
+  directly. For example.
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre
+      class="highlight"
+    ><code>pk;member John avatar http://placebeard.it/512.jpg
+pk;member "Craig Johnson" avatar   (with an attached image)
+</code></pre>
+  </div>
+</div>
+
+<p>
+  To preview the current avatar (if one is set), use the command with no
+  arguments:
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;member John avatar
+</code></pre>
+  </div>
+</div>
+
+<p>
+  To clear your avatar, use the subcommand
+  <code class="highlighter-rouge">avatar clear</code> (eg.
+  <code class="highlighter-rouge">pk;member John avatar clear</code>).
+</p>
+
+<h3 id="member-server-avatar">Member server avatar</h3>
+<p>
+  You can also set an avatar for a specific server. This will “override” the
+  normal avatar, and will be used when proxying messages and looking up member
+  cards in that server. To do so, use the
+  <code class="highlighter-rouge">pk;member serveravatar</code> command, in the
+  same way as the normal avatar command above:
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;member John serveravatar
+pk;member John serveravatar http://placebeard.it/512.jpg
+pk;member "Craig Johnson" serveravatar   (with an attached image)
+pk;member John serveravatar clear
+</code></pre>
+  </div>
+</div>
+
+<h3 id="member-pronouns">Member pronouns</h3>
+<p>
+  If you want to list a member’s preferred pronouns, you can use the pronouns
+  field on a member profile. This is a free text field, so you can put whatever
+  you’d like in there (with a 100 character limit), like so:
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;member John pronouns he/him
+pk;member "Craig Johnson" pronouns anything goes, really
+pk;member Skyler pronouns xe/xir or they/them
+</code></pre>
+  </div>
+</div>
+
+<p>
+  To remove a member’s pronouns, use the command with no pronoun argument (eg.
+  <code class="highlighter-rouge">pk;member John pronouns</code>).
+</p>
+
+<h3 id="member-birthdate">Member birthdate</h3>
+<p>
+  If you want to list a member’s birthdate on their information card, you can
+  set their birthdate through PluralKit using the
+  <code class="highlighter-rouge">pk;member birthdate</code> command. Please use
+  <a href="https://xkcd.com/1179/">ISO-8601 format</a> (<code
+    class="highlighter-rouge"
+    >YYYY-MM-DD</code
+  >) for best results, like so:
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;member John birthdate 1996-07-24
+pk;member "Craig Johnson" birthdate 2004-02-28
+</code></pre>
+  </div>
+</div>
+
+<p>
+  You can also set a birthdate without a year, either in
+  <code class="highlighter-rouge">MM-DD</code> format or
+  <code class="highlighter-rouge">Month Day</code> format, like so:
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;member John birthdate 07-24
+pk;member "Craig Johnson" birthdate Feb 28
+</code></pre>
+  </div>
+</div>
+
+<p>
+  To clear a birthdate, use the command with no birthday argument (eg.
+  <code class="highlighter-rouge">pk;member John birthdate</code>).
+</p>
+
+<h3 id="deleting-members">Deleting members</h3>
+<p>
+  If you want to delete a member, use the
+  <code class="highlighter-rouge">pk;member delete</code> command, like so:
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;member John delete
+</code></pre>
+  </div>
+</div>
+
+<p>
+  You’ll need to confirm the deletion by replying with the member’s ID when the
+  bot asks you to - this is to avoid accidental deletion.
+</p>
+
+<h2 id="proxying">Proxying</h2>
+<p>
+  Proxying is probably the most important part of PluralKit. This allows you to
+  essentially speak “as” the member, with the proper name and avatar displayed
+  on the message. To do so, you must at least
+  <a href="#creating-a-system">have created a member</a>.
+</p>
+
+<h3 id="setting-up-proxy-tags">Setting up proxy tags</h3>
+<p>
+  You’ll need to register a set of <em>proxy tags</em>, which are prefixes
+  and/or suffixes you “enclose” the real message in, as a signal to PluralKit to
+  indicate which member to proxy as. Common proxy tags include
+  <code class="highlighter-rouge">[square brackets]</code>,
+  <code class="highlighter-rouge">{curly braces}</code> or
+  <code class="highlighter-rouge">A:letter prefixes</code>.
+</p>
+
+<p>
+  To set a proxy tag, use the
+  <code class="highlighter-rouge">pk;member proxy</code> command on the member
+  in question. You’ll need to provide a “proxy example”, containing the word
+  <code class="highlighter-rouge">text</code>. For example, if you want square
+  brackets, the proxy example must be
+  <code class="highlighter-rouge">[text]</code>. If you want a letter prefix,
+  make it something like <code class="highlighter-rouge">A:text</code>. For
+  example:
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;member John proxy [text]
+pk;member "Craig Johnson" proxy {text}
+pk;member John proxy J:text
+</code></pre>
+  </div>
+</div>
+
+<p>You can have any proxy tags you want, including one containing emojis.</p>
+
+<p>
+  You can now type a message enclosed in your proxy tags, and it’ll be deleted
+  by PluralKit and reposted with the appropriate member name and avatar (if
+  set).
+</p>
+
+<p>
+  <strong>NB:</strong> If you want
+  <code class="highlighter-rouge">&lt;angle brackets&gt;</code> as proxy tags,
+  there is currently a bug where custom server emojis will (wrongly) be
+  interpreted as proxying with that member (see
+  <a href="https://github.com/xSke/PluralKit/issues/37">issue #37</a>). The
+  current workaround is to use different proxy tags.
+</p>
+
+<h3 id="using-multiple-distinct-proxy-tag-pairs">
+  Using multiple distinct proxy tag pairs
+</h3>
+<p>
+  If you’d like to proxy a member in multiple ways (for example, a name or a
+  nickname, uppercase and lowercase variants, etc), you can add multiple tag
+  pairs. When proxying, you may then use any of the tags to proxy for that
+  specific member.
+</p>
+
+<p>
+  To add a proxy tag to a member, use the
+  <code class="highlighter-rouge">pk;member proxy add</code> command: pk;member
+  John proxy add {text} pk;member Craig proxy add C:text
+</p>
+
+<p>
+  To remove a proxy tag from a member, use the
+  <code class="highlighter-rouge">pk;member proxy remove</code> command:
+  pk;member John proxy remove {text} pk;member Craig proxy remove C:text
+</p>
+
+<h3 id="keeping-your-proxy-tags">Keeping your proxy tags</h3>
+<p>
+  If you’d like your proxied messages to include the proxy tags, you can enable
+  the “keep proxy tags” option for a given member, like so:
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;member John keepproxy on
+</code></pre>
+  </div>
+</div>
+
+<p>
+  Turning the option off is similar - replace “on” with “off” in the command.
+  The default value for every member is off. When proxying a member with
+  multiple proxy tags, the proxy tag used to trigger a given proxy will be
+  included.
+</p>
+
+<p>The practical effect of this is:</p>
+<ul>
+  <li>
+    <strong>Keep proxy tags on:</strong>
+    <code class="highlighter-rouge">[Message goes here]</code> -&gt; [Message
+    goes here]
+  </li>
+  <li>
+    <strong>Keep proxy tags off:</strong>
+    <code class="highlighter-rouge">[Message goes here]</code> -&gt; Message
+    goes here
+  </li>
+</ul>
+
+<h3 id="querying-message-information">Querying message information</h3>
+<p>
+  If you want information about a proxied message (eg. for moderation reasons),
+  you can query the message for its sender account, system, member, etc.
+</p>
+
+<p>
+  Either you can react to the message itself with the ❔ or ❓ emoji, which will
+  DM you information about the message in question, or you can use the
+  <code class="highlighter-rouge">pk;message</code> command followed by
+  <a
+    href="https://support.discord.com/hc/en-us/articles/206346498-Where-can-I-find-my-User-Server-Message-ID-"
+    >the message’s ID</a
+  >.
+</p>
+
+<h3 id="pinging-a-specific-user">Pinging a specific user</h3>
+<p>
+  If you’d like to “ping” the account behind a proxied message without having to
+  query the message and ping them yourself, you can react to the message with
+  the 🔔 or ❗ emoji, and PluralKit will ping the relevant member and account in
+  the same channel on your behalf with a link to the message you reacted to.
+</p>
+
+<h3 id="disabling-proxying-on-a-per-server-basis">
+  Disabling proxying on a per-server basis
+</h3>
+<p>
+  If you need to disable proxying messages for your system entirely in a
+  specific server (for example, if you’d like to use a different proxy bot
+  there), you can type
+  <code class="highlighter-rouge">pk;system proxy on/off</code> to do that.
+</p>
+
+<h3 id="deleting-messages">Deleting messages</h3>
+<p>
+  Since the messages will be posted by PluralKit’s webhook, there’s no way to
+  delete the message as you would a normal user message. To delete a
+  PluralKit-proxied message, you can react to it with the ❌ emoji. Note that
+  this only works if the message has been sent from your own account.
+</p>
+
+<h3 id="autoproxying">Autoproxying</h3>
+<p>
+  The bot’s <em>autoproxy</em> feature allows you to have messages be proxied
+  without directly including the proxy tags. Autoproxy can be set up in various
+  ways. There are three autoproxy modes currently implemented:
+</p>
+
+<p>
+  To see your system’s current autoproxy settings, simply use the command:
+  pk;autoproxy
+</p>
+
+<p>
+  To disable autoproxying for the current server, use the command: pk;autoproxy
+  off
+</p>
+
+<p>
+  <em
+    >(hint: <code class="highlighter-rouge">pk;autoproxy</code> can be shortened
+    to <code class="highlighter-rouge">pk;ap</code> in all related commands)</em
+  >
+</p>
+
+<h4 id="front-mode">Front mode</h4>
+<p>
+  This autoproxy mode will proxy messages as the current <em>first</em> fronter
+  of the system. If you register a switch with
+  <code class="highlighter-rouge">Alice</code> and
+  <code class="highlighter-rouge">Bob</code>, messages without proxy tags will
+  be autoproxied as <code class="highlighter-rouge">Alice</code>. To enable
+  front-mode autoproxying for a given server, use the following command:
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;autoproxy front
+</code></pre>
+  </div>
+</div>
+
+<h4 id="latch-mode">Latch mode</h4>
+<p>
+  This autoproxy mode will essentially “continue” previous proxy tags. If you
+  proxy a message with <code class="highlighter-rouge">Alice</code>’s proxy
+  tags, messages posted afterwards will be proxied as Alice. Proxying again with
+  someone else’s proxy tags, say, <code class="highlighter-rouge">Bob</code>,
+  will cause messages <em>from then on</em> to be proxied as Bob. In other
+  words, it means proxy tags become “sticky”. This will carry over across all
+  channels in the same server.
+</p>
+
+<p>
+  To enable latch-mode autoproxying for a given server, use the following
+  command:
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;autoproxy latch
+</code></pre>
+  </div>
+</div>
+
+<h4 id="member-mode">Member mode</h4>
+<p>
+  This autoproxy mode will autoproxy for a specific selected member, irrelevant
+  of past proxies or fronters.
+</p>
+
+<p>
+  To enable member-mode autoproxying for a given server, use the following
+  command, where <code class="highlighter-rouge">&lt;member&gt;</code> is a
+  member name (in “quotes” if multiple words) or 5-letter ID:
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;autoproxy &lt;member&gt;
+</code></pre>
+  </div>
+</div>
+
+<h2 id="managing-switches">Managing switches</h2>
+<p>
+  PluralKit allows you to log member switches through the bot. Essentially, this
+  means you can mark one or more members as <em>the current fronter(s)</em> for
+  the duration until the next switch. You can then view the list of switches and
+  fronters over time, and get statistics over which members have fronted for how
+  long.
+</p>
+
+<h3 id="logging-switches">Logging switches</h3>
+<p>
+  To log a switch, use the
+  <code class="highlighter-rouge">pk;switch</code> command with one or more
+  members. For example:
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;switch John
+pk;switch "Craig Johnson" John
+</code></pre>
+  </div>
+</div>
+
+<p>
+  Note that the order of members are preserved (this is useful for indicating
+  who’s “more” at front, if applicable). If you want to specify a member with
+  multiple words in their name, remember to encase the name in “double quotes”.
+</p>
+
+<h3 id="switching-out">Switching out</h3>
+<p>
+  If you want to log a switch with <em>no</em> members, you can log a switch-out
+  as follows:
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;switch out
+</code></pre>
+  </div>
+</div>
+
+<h3 id="moving-switches">Moving switches</h3>
+<p>
+  If you want to log a switch that happened further back in time, you can log a
+  switch and then <em>move</em> it back in time, using the
+  <code class="highlighter-rouge">pk;switch move</code> command. You can either
+  specify a time either in relative terms (X days/hours/minutes/seconds ago) or
+  in absolute terms (this date, at this time). Absolute times will be
+  interpreted in the <a href="#setting-a-system-time-zone">system time zone</a>.
+  For example:
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;switch move 1h
+pk;switch move 4d12h
+pk;switch move 2 PM
+pk;switch move May 8th 4:30 PM
+</code></pre>
+  </div>
+</div>
+
+<p>
+  Note that you can’t move a switch <em>before</em> the
+  <em>previous switch</em>, to avoid breaking consistency. Here’s a rough
+  ASCII-art illustration of this:
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>       YOU CAN NOT               YOU CAN
+        MOVE HERE               MOVE HERE       CURRENT SWITCH                 
+            v                       v               START                   NOW
+[===========================]       |                 v                      v
+                             [=== PREVIOUS SWITCH ===]|                      |
+                             \________________________[=== CURRENT SWITCH ===]
+                                                      
+----- TIME AXIS ----&gt;
+</code></pre>
+  </div>
+</div>
+
+<h3 id="delete-switches">Delete switches</h3>
+<p>
+  If you’d like to delete the most recent switch, use the
+  <code class="highlighter-rouge">pk;switch delete</code> command. You’ll need
+  to confirm the deletion by clicking a reaction.
+</p>
+
+<p>
+  If you’d like to clear your system’s entire switch history, use the
+  <code class="highlighter-rouge">pk;switch delete all</code> command. This
+  isn’t reversible!
+</p>
+
+<h3 id="querying-fronter">Querying fronter</h3>
+<p>
+  To see the current fronter in a system, use the
+  <code class="highlighter-rouge">pk;system fronter</code> command. You can use
+  this on your current system, or on other systems. For example:
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;system fronter
+pk;system @Craig#5432 fronter
+pk;system qazws fronter
+</code></pre>
+  </div>
+</div>
+
+<h3 id="querying-front-history">Querying front history</h3>
+<p>
+  To look at the front history of a system (currently limited to the last 10
+  switches). use the
+  <code class="highlighter-rouge">pk;system fronthistory</code> command, for
+  example:
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;system fronthistory
+pk;system @Craig#5432 fronthistory
+pk;system qazws fronthistory
+</code></pre>
+  </div>
+</div>
+
+<h3 id="querying-front-percentage">Querying front percentage</h3>
+<p>
+  To look at the per-member breakdown of the front over a given time period, use
+  the <code class="highlighter-rouge">pk;system frontpercent</code> command. If
+  you don’t provide a time period, it’ll default to 30 days. For example:
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;system frontpercent
+pk;system @Craig#5432 frontpercent 7d
+pk;system qazws frontpercent 100d12h
+</code></pre>
+  </div>
+</div>
+
+<p>
+  Note that in cases of switches with multiple members, each involved member
+  will have the full length of the switch counted towards it. This means that
+  the percentages may add up to over 100%.
+</p>
+
+<h2 id="privacy">Privacy</h2>
+<p>
+  There are various reasons you may not want information about your system or
+  your members to be public. As such, there are a few controls to manage which
+  information is publicly accessible or not.
+</p>
+
+<h3 id="system-privacy">System privacy</h3>
+<p>
+  At the moment, there are four aspects of system privacy that can be
+  configured.
+</p>
+
+<ul>
+  <li>System description</li>
+  <li>Current fronter</li>
+  <li>Front history</li>
+  <li>Member list</li>
+</ul>
+
+<p>
+  Each of these can be set to <strong>public</strong> or
+  <strong>private</strong>. When set to <strong>public</strong>, anyone who
+  queries your system (by account or system ID, or through the API), will see
+  this information. When set to <strong>private</strong>, the information will
+  only be shown when <em>you yourself</em> query the information. The cards will
+  still be displayed in the channel the commands are run in, so it’s still your
+  responsibility not to pull up information in servers where you don’t want it
+  displayed.
+</p>
+
+<p>To update your system privacy settings, use the following commands:</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;system privacy &lt;subject&gt; &lt;level&gt;
+</code></pre>
+  </div>
+</div>
+
+<p>
+  where <code class="highlighter-rouge">&lt;subject&gt;</code> is either
+  <code class="highlighter-rouge">description</code>,
+  <code class="highlighter-rouge">fronter</code>,
+  <code class="highlighter-rouge">fronthistory</code> or
+  <code class="highlighter-rouge">list</code>, corresponding to the options
+  above, and <code class="highlighter-rouge">&lt;level&gt;</code> is either
+  <code class="highlighter-rouge">public</code> or
+  <code class="highlighter-rouge">private</code>.
+  <code class="highlighter-rouge">&lt;subject&gt;</code> can also be
+  <code class="highlighter-rouge">all</code> in order to change all subjects at
+  once.
+</p>
+
+<p>For example:</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;system privacy description private
+pk;system privacy fronthistory public
+pk;system privacy list private
+</code></pre>
+  </div>
+</div>
+
+<p>
+  When the <strong>member list</strong> is <strong>private</strong>, other users
+  will not be able to view the full member list of your system, but they can
+  still query individual members given their 5-letter ID. If
+  <strong>current fronter</strong> is private, but
+  <strong>front history</strong> isn’t, someone can still see the current
+  fronter by looking at the history (this combination doesn’t make much sense).
+</p>
+
+<h3 id="member-privacy">Member privacy</h3>
+<p>There are also seven options for configuring member privacy;</p>
+
+<ul>
+  <li>Name</li>
+  <li>Description</li>
+  <li>Avatar</li>
+  <li>Birthday</li>
+  <li>Pronouns</li>
+  <li>Metadata <em>(message count, creation date, etc)</em></li>
+  <li>Visibility <em>(whether the member shows up in member lists)</em></li>
+</ul>
+
+<p>
+  As with system privacy, each can be set to <strong>public</strong> or
+  <strong>private</strong>. The same rules apply for how they are shown, too.
+  When set to <strong>public</strong>, anyone who queries your system (by
+  account or system ID, or through the API), will see this information. When set
+  to <strong>private</strong>, the information will only be shown when
+  <em>you yourself</em> query the information. The cards will still be displayed
+  in the channel the commands are run in, so it’s still your responsibility not
+  to pull up information in servers where you don’t want it displayed.
+</p>
+
+<p>However, there are two catches:</p>
+<ul>
+  <li>
+    When the <strong>name</strong> is set to private, it will be replaced by the
+    member’s <strong>display name</strong>, but only if they have one! If the
+    member has no display name,
+    <strong>name privacy will not do anything</strong>. PluralKit still needs
+    some way to refer to a member by name :)
+  </li>
+  <li>
+    When <strong>visibility</strong> is set to private, the member will not show
+    up in member lists unless <code class="highlighter-rouge">-all</code> is
+    used in the command (and you are part of the system).
+  </li>
+</ul>
+
+<p>To update a members privacy you can use the command:</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre
+      class="highlight"
+    ><code>member &lt;member&gt; privacy &lt;subject&gt; &lt;level&gt;
+</code></pre>
+  </div>
+</div>
+
+<p>
+  where <code class="highlighter-rouge">&lt;member&gt;</code> is the name or the
+  id of a member in your system,
+  <code class="highlighter-rouge">&lt;subject&gt;</code> is either
+  <code class="highlighter-rouge">name</code>,
+  <code class="highlighter-rouge">description</code>,
+  <code class="highlighter-rouge">avatar</code>,
+  <code class="highlighter-rouge">birthday</code>,
+  <code class="highlighter-rouge">pronouns</code>,
+  <code class="highlighter-rouge">metadata</code>, or
+  <code class="highlighter-rouge">visiblity</code> corresponding to the options
+  above, and <code class="highlighter-rouge">&lt;level&gt;</code> is either
+  <code class="highlighter-rouge">public</code> or
+  <code class="highlighter-rouge">private</code>.
+  <code class="highlighter-rouge">&lt;subject&gt;</code> can also be
+  <code class="highlighter-rouge">all</code> in order to change all subjects at
+  once.<br />
+  <code class="highlighter-rouge">metadata</code> will affect the message count,
+  the date created, the last fronted, and the last message information.
+</p>
+
+<p>For example:</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;member John privacy visibility private
+pk;member "Craig Johnson" privacy description public
+pk;member Robert privacy birthday public
+pk;member Skyler privacy all private
+</code></pre>
+  </div>
+</div>
+
+<h2 id="moderation-commands">Moderation commands</h2>
+
+<h3 id="log-channel">Log channel</h3>
+<p>
+  If you want to log every proxied message to a separate channel for moderation
+  purposes, you can use the
+  <code class="highlighter-rouge">pk;log</code> command with the channel name.
+  This requires you to have the <em>Manage Server</em> permission on the server.
+  For example:
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;log #proxy-log
+</code></pre>
+  </div>
+</div>
+
+<p>
+  To disable logging, use the
+  <code class="highlighter-rouge">pk;log</code> command with no channel name.
+</p>
+
+<h3 id="channel-blacklisting">Channel blacklisting</h3>
+<p>
+  It’s possible to blacklist a channel from being used for proxying. To do so,
+  use the <code class="highlighter-rouge">pk;blacklist</code> command, for
+  examplle:
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre
+      class="highlight"
+    ><code>pk;blacklist add #admin-channel #mod-channel #welcome
+pk;blacklist add all
+pk;blacklist remove #general-two
+pk;blacklist remove all
+</code></pre>
+  </div>
+</div>
+
+<p>
+  This requires you to have the <em>Manage Server</em> permission on the server.
+</p>
+
+<h3 id="log-cleanup">Log cleanup</h3>
+<p>
+  Many servers use <em>logger bots</em> for keeping track of edited and deleted
+  messages, nickname changes, and other server events. Because PluralKit deletes
+  messages as part of proxying, this can often clutter up these logs. To remedy
+  this, PluralKit can delete those log messages from the logger bots. To enable
+  this, use the following command:
+</p>
+
+<div class="highlighter-rouge">
+  <div class="highlight">
+    <pre class="highlight"><code>pk;logclean on
+</code></pre>
+  </div>
+</div>
+
+<p>
+  This requires you to have the <em>Manage Server</em> permission on the server.
+  At the moment, log cleanup works with the following bots:
+</p>
+<ul>
+  <li>Auttaja</li>
+  <li>blargbot</li>
+  <li>Carl-bot</li>
+  <li>Circle</li>
+  <li>Dyno</li>
+  <li>GenericBot</li>
+  <li>Logger (#6088 and #6278)</li>
+  <li>Mantaro</li>
+  <li>Pancake</li>
+  <li>UnbelievaBoat</li>
+</ul>
+
+<p>
+  If you want support for another logging bot,
+  <a href="https://discord.gg/PczBt78">let me know on the support server</a>.
+</p>
+
+<p>
+  Another alternative is to use the <strong>Gabby Gums</strong> logging bot - an
+  invite link for which can be found
+  <a href="https://discord.gg/Xwhk89T">on Gabby Gums’ support server</a>.
+</p>
+
+<h2 id="importing-and-exporting-data">Importing and exporting data</h2>
+<p>
+  If you’re a user of another proxy bot (eg. Tupperbox), or you want to import a
+  saved system backup, you can use the importing and exporting commands.
+</p>
+
+<h3 id="importing-from-tupperbox">Importing from Tupperbox</h3>
+<p>
+  If you’re a user of the <em>other proxying bot</em> Tupperbox, you can import
+  system and member information from there. This is a fairly simple process:
+</p>
+
+<ol>
+  <li>
+    Export your data from Tupperbox:
+    <div class="highlighter-rouge">
+      <div class="highlight">
+        <pre class="highlight"><code>tul!export
+</code></pre>
+      </div>
+    </div>
+  </li>
+  <li>Copy the URL for the data file (or download it)</li>
+  <li>
+    Import your data into PluralKit:
+    <div class="highlighter-rouge">
+      <div class="highlight">
+        <pre
+          class="highlight"
+        ><code>pk;import https://link/to/the/data/file.json
+</code></pre>
+      </div>
+    </div>
+    <p>
+      <em
+        >(alternatively, run <code class="highlighter-rouge">pk;import</code> by
+        itself and attach the .json file)</em
+      >
+    </p>
+  </li>
+</ol>
+
+<p>
+  Note that while Tupperbox supports features such as multiple proxies per
+  member, per-member system tags, and member groups, PluralKit does not.
+  PluralKit will warn you when you’re importing a Tupperbox file that makes use
+  of such features, as they will not carry over.
+</p>
+
+<h3 id="importing-from-pluralkit">Importing from PluralKit</h3>
+<p>
+  If you have an exported file from PluralKit, you can import system, member and
+  switch information from there like so:
+</p>
+<ol>
+  <li>
+    Export your data from PluralKit:
+    <div class="highlighter-rouge">
+      <div class="highlight">
+        <pre class="highlight"><code>pk;export
+</code></pre>
+      </div>
+    </div>
+  </li>
+  <li>Copy the URL for the data file (or download it)</li>
+  <li>
+    Import your data into PluralKit:
+    <div class="highlighter-rouge">
+      <div class="highlight">
+        <pre
+          class="highlight"
+        ><code>pk;import https://link/to/the/data/file.json
+</code></pre>
+      </div>
+    </div>
+    <p>
+      <em
+        >(alternatively, run <code class="highlighter-rouge">pk;import</code> by
+        itself and attach the .json file)</em
+      >
+    </p>
+  </li>
+</ol>
+
+<h3 id="exporting-your-pluralkit-data">Exporting your PluralKit data</h3>
+<p>
+  To export all the data associated with your system, run the
+  <code class="highlighter-rouge">pk;export</code> command. This will send you a
+  JSON file containing your system, member, and switch information.
+</p>

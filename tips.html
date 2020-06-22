@@ -1,0 +1,86 @@
+<h1 id="tips-and-tricks">Tips and Tricks</h1>
+
+<h2 id="use-command-shorthands">Use command shorthands</h2>
+<p>PluralKit has a couple of useful command shorthands to reduce the typing:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Original</th>
+      <th>Shorthand</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>pk;system</td>
+      <td>pk;s</td>
+    </tr>
+    <tr>
+      <td>pk;system list</td>
+      <td>pk;s l</td>
+    </tr>
+    <tr>
+      <td>pk;system list full</td>
+      <td>pk;s l f</td>
+    </tr>
+    <tr>
+      <td>pk;system fronter</td>
+      <td>pk;s f</td>
+    </tr>
+    <tr>
+      <td>pk;system fronthistory</td>
+      <td>pk;s fh</td>
+    </tr>
+    <tr>
+      <td>pk;system frontpercent</td>
+      <td>pk;s fp</td>
+    </tr>
+    <tr>
+      <td>pk;member</td>
+      <td>pk;m</td>
+    </tr>
+    <tr>
+      <td>pk;member new</td>
+      <td>pk;m n</td>
+    </tr>
+    <tr>
+      <td>pk;switch</td>
+      <td>pk;sw</td>
+    </tr>
+    <tr>
+      <td>pk;message</td>
+      <td>pk;msg</td>
+    </tr>
+    <tr>
+      <td>pk;autoproxy</td>
+      <td>pk;ap</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="permission-checker-command">Permission checker command</h2>
+<p>
+  If you’re having issues with PluralKit not proxying, it may be an issue with
+  your server’s channel permission setup. PluralKit needs the
+  <em>Read Messages</em>, <em>Manage Messages</em> and
+  <em>Manage Webhooks</em> permission to function.
+</p>
+
+<p>
+  To quickly check if PluralKit is missing channel permissions, you can use the
+  <code class="highlighter-rouge">pk;permcheck</code> command in the server in
+  question. It’ll return a list of channels on the server with missing
+  permissions. This may include channels you don’t want PluralKit to have access
+  to for one reason or another (eg. admin channels).
+</p>
+
+<p>
+  If you want to check permissions in DMs, you’ll need to add a server ID, and
+  run the command with that. For example:
+  <code class="highlighter-rouge">pk;permcheck 466707357099884544</code>. You
+  can find this ID
+  <a href="https://discordia.me/developer-mode"
+    >by enabling Developer Mode and right-clicking (or long-pressing) on the
+    server icon</a
+  >.
+</p>
